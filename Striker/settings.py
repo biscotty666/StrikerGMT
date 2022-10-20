@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['192.168.0.238', 'biscotty.me']
 # Application definition
 
 INSTALLED_APPS = [
+    'StrikerGMT',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Denver'
 
 USE_I18N = True
 
