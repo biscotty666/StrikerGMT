@@ -1,0 +1,48 @@
+{% extends './base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+    <div class="player_list_heading mb-3">
+      <h1 class="display-1">Strikes</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <h5 class="display-6">Active</h5>
+  {% for strike in strikes_active %}
+  <div class="col-md-2 ">
+    <div class="card text-black">
+      <div class="card-header">
+        {{ strike.player.playerName }}
+      </div>
+      <div class="card-body">
+        <p>{{ strike.strike_date }}</p>
+        <p>Activity: {{ strike.activity }}</p>
+        <p>Hard: {{ strike.ishard }}</p>
+        <p>Comments: {{ strike.comments }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="row mt-4">
+  <h5 class="display-6">Legacy</h5>
+  {% for strike in strikes_legacy %}
+  <div class="col-md-2 ">
+    <div class="card text-black">
+      <div class="card-header">
+        {{ strike.player.playerName }}
+      </div>
+      <div class="card-body">
+        <p>{{ strike.strike_date }}</p>
+        <p>Activity: {{ strike.activity }}</p>
+        <p>Hard: {{ strike.ishard }}</p>
+        <p>Comments: {{ strike.comments }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends './base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+    <div class="player_list_heading mb-3">
+      <h1 class="display-1">Players</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  {% for player in players %}
+  <div class="col-md-4 ">
+    <div class="card text-black">
+      <div class="card-header">
+        {{ player.playerName }}
+      </div>
+      <div class="card-body">
+        <p>GP: {{ player.gp|intword }}</p>
+        <p>Allycode: <a href="https://swgoh.gg/p/{{ player.allycode }}" class="text-decoration-none">{{ player.allycode }}</a> .gg</p>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'player.detail' pk=player.id %}" class="btn btn-info btn-sm"><i class="fa-regular fa-chevron-right"></i></a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+{% endblock content %}

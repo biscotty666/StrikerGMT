@@ -1,0 +1,22 @@
+{% extends './base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card text-black">
+      <div class="card-header">
+        Player Details
+      </div>
+      <div class="card-body">
+        <h1 class="display-5">{{ player.playerName }}</h1>
+        <p>GP: {{ player.gp|intcomma }}</p>
+        <p>Chars: {{ player.gpChar|intcomma }}</p>
+        <p>Ships: {{ player.gpShip|intcomma }}</p>
+        <p>Allycode: {{ player.allycode }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
