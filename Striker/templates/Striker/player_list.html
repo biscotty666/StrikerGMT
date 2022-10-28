@@ -2,31 +2,34 @@
 {% load humanize %}
 
 {% block content %}
-<div class="row">
-  <div class="col">
-    <div class="player_list_heading mb-3">
-      <h1 class="display-1">Players</h1>
+<section class="bg-black body-font">
+  <div class="container px-5 py-2 mx-auto flex flex-wrap">
+    <div class="-m-4">
+      <div class="p-4 md:w-full">
+        <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Current Members</h1>
+        <div class="flex flex-wrap p-2 sm:flex-row">
+          {% for player in players %}
+          <div class="box-border h-85 w-60 mb-1">
+            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2">
+              <div class="bg-gray-800">
+                <h2 class="text-blue-400 text-lg title-font font-medium mb-4"><a href="">{{ player.name }}</a>
+                </h2>
+              </div>
+              <div class="text-left">
+                <p class="leading-relaxed text-base">GP: {{ player.gp|intword }}</p>
+                <p class="leading-relaxed text-base">Toons: {{ player.gpChar|intword }}</p>
+                <p class="leading-relaxed text-base">Ships: {{ player.gpShip|intword|intcomma }}</p>
+                <p class="leading-relaxed text-base">Allycode: <a class="text-blue-500"
+                    href="https://swgoh.gg/p/{{ player.allycode }}">{{ player.allycode }}</a> <span
+                    class="text-xs">.gg</span></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="row">
-  {% for player in players %}
-  <div class="col-md-4 ">
-    <div class="card text-black">
-      <div class="card-header">
-        {{ player.playerName }}
-      </div>
-      <div class="card-body">
-        <p>GP: {{ player.gp|intword }}</p>
-        <p>Allycode: <a href="https://swgoh.gg/p/{{ player.allycode }}" class="text-decoration-none">{{ player.allycode }}</a> .gg</p>
-      </div>
-      <div class="card-footer">
-        <a href="{% url 'player.detail' pk=player.id %}" class="btn btn-info btn-sm"><i class="fa-regular fa-chevron-right"></i></a>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-</div>
-
+</section>
 
 {% endblock content %}

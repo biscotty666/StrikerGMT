@@ -2,47 +2,51 @@
 {% load humanize %}
 
 {% block content %}
-<div class="row">
-  <div class="col">
-    <div class="player_list_heading mb-3">
-      <h1 class="display-1">Strikes</h1>
+<section class="bg-black body-font">
+  <div class="container px-5 py-2 mx-auto flex flex-wrap">
+    <div class="-m-4">
+      <div class="p-4 md:w-full">
+        <h1 class="text-xl mb-2 mt-2 text-emerald-500">Strikes</h1>
+        <h5 class="display-6 text-emerald-500 mb-2">Active</h5>
+        <div class="flex flex-wrap p-2 sm:flex-row">
+          {% for strike in strikes_active %}
+          <div class="box-border h-85 w-60 mb-1">
+            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2">
+              <div class="bg-gray-800">
+                <h2 class="text-blue-400 text-lg title-font font-medium mb-4"><a href="">{{ strike.player.playerName }}</a>
+                </h2>
+              </div>
+              <div class="text-left">
+                <p class="leading-relaxed text-base">{{ strike.strike_date|date }}</p>
+                <p class="leading-relaxed text-base">Activity: {{ strike.activity }}</p>
+                <p class="leading-relaxed text-base">Hard: {{ strike.ishard|yesno|capfirst }}</p>
+                <p class="leading-relaxed text-base">Notes: {{ strike.comments|truncatewords:3 }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <h5 class="display-6 text-emerald-500 mb-2">Legacy</h5>
+        <div class="flex flex-wrap p-2 sm:flex-row">
+          {% for strike in strikes_legacy %}
+          <div class="box-border h-85 w-60 mb-1">
+            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2">
+              <div class="bg-gray-800">
+                <h2 class="text-blue-400 text-lg title-font font-medium mb-4"><a href="">{{ strike.player.playerName }}</a>
+                </h2>
+              </div>
+              <div class="text-left">
+                <p class="leading-relaxed text-base">{{ strike.strike_date|date }}</p>
+                <p class="leading-relaxed text-base">Activity: {{ strike.activity }}</p>
+                <p class="leading-relaxed text-base">Hard: {{ strike.ishard|yesno|capfirst }}</p>
+                <p class="leading-relaxed text-base">Notes: {{ strike.comments|truncatewords:3 }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <h5 class="display-6">Active</h5>
-  {% for strike in strikes_active %}
-  <div class="col-md-2 ">
-    <div class="card text-black">
-      <div class="card-header">
-        {{ strike.player.playerName }}
-      </div>
-      <div class="card-body">
-        <p>{{ strike.strike_date }}</p>
-        <p>Activity: {{ strike.activity }}</p>
-        <p>Hard: {{ strike.ishard }}</p>
-        <p>Comments: {{ strike.comments }}</p>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-</div>
-<div class="row mt-4">
-  <h5 class="display-6">Legacy</h5>
-  {% for strike in strikes_legacy %}
-  <div class="col-md-2 ">
-    <div class="card text-black">
-      <div class="card-header">
-        {{ strike.player.playerName }}
-      </div>
-      <div class="card-body">
-        <p>{{ strike.strike_date }}</p>
-        <p>Activity: {{ strike.activity }}</p>
-        <p>Hard: {{ strike.ishard }}</p>
-        <p>Comments: {{ strike.comments }}</p>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-</div>
+</section>
 {% endblock content %}

@@ -1,0 +1,14 @@
+<header class="text-gray-600 body-font">
+  <div class="container mx-auto">
+    <div class="flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-2 md:mb-0">
+
+        <span class="ml-3 text-2xl text-emerald-500">Striker</span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center text-blue-500">
+        <a class="px-2 mx-1 border rounded border-emerald-500" href="{% url 'strike.list' %}">Strikes</a>
+        <a class="px-2 mx-1 border rounded border-emerald-500" href="{% url 'player.list' %}">Players</a>
+      </nav>
+  </div>
+</div>
+</header>

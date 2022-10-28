@@ -1,9 +1,10 @@
 from django.db import models
 
 class Guild(models.Model):
-  guildName = models.CharField(max_length=15)
-  description = models.CharField(max_length=100)
-  numMembers = models.IntegerField()
+  guildId = models.CharField(max_length=20,blank=True)
+  name = models.CharField(max_length=15,blank=True)
+  desc = models.CharField(max_length=100,blank=True)
+  members = models.IntegerField()
   status = models.IntegerField(null=True)
   required = models.IntegerField(null=True)
   gp = models.IntegerField()
@@ -12,10 +13,10 @@ class Guild(models.Model):
   message = models.CharField(max_length=100, blank=True)
 
   def __str__(self):
-    return f'{self.guildName} Members: {self.numMembers} GP: {self.gp}'
+    return f'{self.name} Members: {self.members} GP: {self.gp}'
   
 class Player(models.Model):
-  playerName = models.CharField(max_length=30)
+  name = models.CharField(max_length=30)
   playerId = models.CharField(max_length=15)
   allycode = models.IntegerField()
   level = models.IntegerField()
@@ -24,12 +25,11 @@ class Player(models.Model):
   gpShip = models.IntegerField()
   active = models.BooleanField(default=True)
   guildMemberLevel = models.IntegerField()
-  guildRefId = models.CharField(max_length=30)
-  GrandArenaLifeTime = models.IntegerField()
-  guild = models.ForeignKey(Guild, on_delete=models.CASCADE)
+  updated = models.CharField(max_length=30,blank=True)
+  guild = models.ForeignKey(Guild, default=1, on_delete=models.CASCADE)
   
   def __str__(self):
-    return f'{self.playerName}, GP: {self.gp}'
+    return f'{self.name}, GP: {self.gp}'
   
 class Strike(models.Model):
   STRIKE_ACTIVITY = (
@@ -50,4 +50,19 @@ class Strike(models.Model):
   def __str__(self):
     return f'{self.player}, {self.strike_date}, {self.ishard}, {self.activity}, {self.comments}'
 
+class Toon(models.Model):
+  player = models.ForeignKey(Player, on_delete=models.CASCADE)
+  toonID = models.CharField(max_length=45)
+  toonName = models.CharField(max_length=45)
+  nameKey = models.CharField(max_length=45)
+  rarity = models.IntegerField()
+  toonLevel = models.IntegerField()
+  gp = models.IntegerField()
+  gearLevel = models.IntegerField()
+  primaryUnitStat = models.IntegerField()
+  relic = models.IntegerField()
+  
+  def __str__(self):
+    return f'{self.toonName}'
+  
 

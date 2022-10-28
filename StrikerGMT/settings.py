@@ -38,12 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.utils.text',
     'Striker',
-    'bootstrap5',
     'fontawesomefree',
+    'tailwind',
+    'django_browser_reload',
+    'theme',
     'crispy_forms',
-    'crispy_bootstrap5',
-    'bootstrap_datepicker_plus'
+    'import_export',
+]
+
+TAILWIND_APP_NAME = 'theme'
+
+TAILWIND_CSS_PATH = 'css/styles.css'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'StrikerGMT.urls'
@@ -74,9 +85,6 @@ TEMPLATES = [
     },
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
-CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 WSGI_APPLICATION = 'StrikerGMT.wsgi.application'
 
