@@ -1,17 +1,64 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .models import Player, Strike, Guild, Toon
 from datetime import date, timedelta
-from .forms import PlayerModelForm
+from .forms import PlayerModelForm, StrikeModelForm
 from django.views.generic import CreateView, TemplateView, ListView, DetailView
 
 class HomeView(TemplateView):
   template_name = 'Striker/home.html'
   
+class ImportConfirmView(TemplateView):
+  template_name = 'Striker/import_confirm.html'
+  
+def strike_create(request):
+  form = StrikeModelForm()
+  print(request)
+  if request.method == "POST":
+    print('Receiving a post request')
+    form = StrikeModelForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('/strikes')
+  context = {
+    "form": form
+  }
+  return render(request, "Striker/strike_create.html", context)
+
+def strike_detail(request, pk):
+  strike = Strike.objects.get(id=pk)
+  context = {
+    "strike": strike
+  }
+  return render(request, 'Striker/strike_detail.html', context)
+
+def strike_delete(request, pk):
+  strike = Strike.objects.get(id=pk)
+  strike.delete()
+  return redirect('/strikes')
+
+def strike_update(request, pk):
+  strike = Strike.objects.get(id=pk)
+  form = StrikeModelForm(instance=strike)
+  if request.method == "POST":
+    print('Receiving a post request')
+    form = StrikeModelForm(request.POST, instance=strike)
+    if form.is_valid():
+      form.save()
+      return redirect('/strikes')
+  context = {
+    "strike": strike,
+    "form": form
+  }
+  return render(request, "Striker/strike_update.html", context)
+  
+
+  
 class StrikeCreateView(CreateView):
   model = Strike
   fields = ['player', 'strike_date', 'activity', 'ishard', 'comments']
+  template_name = 'Striker/strike_create.html'
   success_url = '/strikes/'
 
 class PlayerListView(ListView):
@@ -28,11 +75,17 @@ class StrikeListView(ListView):
         context['strikes_legacy'] = Strike.objects.filter(strike_date__lt=ActiveDate).order_by('-strike_date')
         return context
 
-
 class PlayerDetailView(DetailView):
   model = Player
+  # toons = Toon.objects.filter(player=pk_url_kwarg)
   context_object_name = 'player'
-
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    # print(self.kwargs)
+    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).order_by('-gp')
+    return context
+      
+      
 def import_data(request):
   from .swgohhelp import SWGOHhelp, settings
   import json
@@ -47,11 +100,6 @@ def import_data(request):
   with open('Striker/swgoh/json/guild.json', 'w') as f:
     json.dump(response, f)
 
-  print("Getting toon game data...")
-  response = client.get_data('player', config['allycode'])
-  with open('Striker/swgoh/json/player.json', 'w') as f:
-    json.dump(response, f)
-  
   with open('Striker/swgoh/json/guild.json', 'r') as f:
     guild = json.load(f)
     roster = guild[0]['roster']
@@ -108,15 +156,21 @@ def import_data(request):
   players = Player.objects.all()
   Toon.objects.all().delete()
   for player in players:
+    print("Getting toon game data...")
+    response = client.get_data('player', player.allycode)
+    with open('Striker/swgoh/json/player.json', 'w') as f:
+      json.dump(response, f)
+  
+
     with open('Striker/swgoh/json/player.json') as f:
       roster = json.load(f)
       roster = roster[0]['roster']
       for toon in roster:
         relic = toon['relic']
-        if toon['relic']==None:
+        if toon['relic']==None or toon['relic']['currentTier']==1:
           relic=0
         else:
-          relic=toon['relic']['currentTier']
+          relic=toon['relic']['currentTier']-2
         if toon['primaryUnitStat']==None:
           pus=0
         else:

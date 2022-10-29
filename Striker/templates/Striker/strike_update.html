@@ -1,0 +1,23 @@
+{% extends './base.html' %}
+{% block content %}
+<section class="text-gray-600 body-font overflow-hidden">
+  <div class="px-5 py-24 mx-auto">
+    <div class="mx-auto flex flex-wrap">
+      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-2 mb-6 lg:mb-0">
+        <a class="mb-2" href="{% url 'strike.list' %}">Back to strikes</a>
+        <hr />
+        <div class="flex mb-4">
+          <a href="{% url 'strike.detail' strike.pk%}" class="flex-grow py-2 text-lg px-1  border-b-2 border-gray-300 ">Description</a>
+          <a class="flex-grow text-indigo-500 border-b-2 border-emerald-500 py-2 text-lg px-1">Update</a>
+        </div>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="border px-2 border-blue-400 text-slate-200" type="submit">Update</button>
+          </form>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+{% endblock content %}

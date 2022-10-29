@@ -1,0 +1,39 @@
+{% extends './base.html' %}
+{% block content %}
+
+<section class="text-slate-200 body-font overflow-hidden">
+  <div class="px-5 py-24 mx-auto">
+    <div class="mx-auto flex flex-wrap">
+      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-2 mb-6 lg:mb-0">
+        <a class="mb-2" href="{% url 'strike.list' %}">Back to strikes</a>
+        <hr />
+          <!-- <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2> -->
+        <div class="flex mb-4">
+          <a href="{% url 'strike.detail' strike.pk %}" class="flex-grow text-indigo-500 border-b-2 border-emerald-500 py-2 text-lg px-1">Description</a>
+          <a href="{% url 'strike.update' strike.pk %}" class="flex-grow py-2 text-lg px-1  border-b-2 border-gray-300 ">Update</a>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-slate-400">{{ strike.player.name }}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-slate-400">{{ strike.strike_date }}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-slate-400">{{ strike.activity }}</span>
+        </div>
+        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <span class="text-slate-400">Hard: {{ strike.ishard }}</span>
+        </div>
+        <h5>Comments:</h5>
+        <div class="flex border mb-6 border-gray-200 py-2">
+          <span class="text-slate-400">{{ strike.comments }}</span>
+        </div>
+      <hr class="mb-2" />
+      <a href="{% url 'strike.delete' strike.pk %}">Delete</a>
+      </div>
+    </div>
+    <!-- <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400"> -->
+  </div>
+  </div>
+</section>
+{% endblock content %}

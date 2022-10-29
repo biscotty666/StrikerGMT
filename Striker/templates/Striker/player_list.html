@@ -12,7 +12,7 @@
           <div class="box-border h-85 w-60 mb-1">
             <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2">
               <div class="bg-gray-800">
-                <h2 class="text-blue-400 text-lg title-font font-medium mb-4"><a href="">{{ player.name }}</a>
+                <h2 class="text-blue-400 text-lg title-font font-medium mb-4"><a href="{% url 'player.detail' player.pk %}">{{ player.name }}</a>
                 </h2>
               </div>
               <div class="text-left">

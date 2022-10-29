@@ -2,21 +2,34 @@
 {% load humanize %}
 
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <div class="card text-black">
-      <div class="card-header">
-        Player Details
-      </div>
-      <div class="card-body">
-        <h1 class="display-5">{{ player.playerName }}</h1>
-        <p>GP: {{ player.gp|intcomma }}</p>
-        <p>Chars: {{ player.gpChar|intcomma }}</p>
-        <p>Ships: {{ player.gpShip|intcomma }}</p>
-        <p>Allycode: {{ player.allycode }}</p>
+<section class="bg-black body-font">
+  <div class="container px-5 py-2 mx-auto flex flex-wrap">
+    <div class="-m-4">
+      <div class="p-4 md:w-full">
+        <h1 class="text-2xl mb-2 mt-2 text-emerald-500">{{ player.name }}</h1>
+        <div class="flex flex-wrap p-2 sm:flex-row">
+          {% for toon in toons %}
+          <div class="box-border h-85 w-80 mb-1">
+            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2">
+              <div class="bg-gray-800">
+                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4">{{ toon.toonName }}
+                </h2>
+              </div>
+              <div class="text-left">
+                <p class="leading-relaxed text-base">{{ toon.name }}</p>
+                <p class="leading-relaxed text-base">GP: {{ toon.gp|intcomma }}</p>
+                <p class="leading-relaxed text-base">Gear: {{ toon.gearLevel }}</p>
+                <p class="leading-relaxed text-base">Relic: {{ toon.relic }}</p>
+                <p class="leading-relaxed text-base">Level: {{ toon.toonLevel }}</p>
+                <p class="leading-relaxed text-base">Stars: {{ toon.rarity }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 {% endblock content %}
 

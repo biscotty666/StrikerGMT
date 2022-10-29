@@ -1,0 +1,20 @@
+{% extends './base.html' %}
+{% block content %}
+<section class="body-font overflow-hidden">
+  <div class="px-5 py-24 mx-auto">
+    <div class="mx-auto justify-items-start text-left">
+      <div class="lg:w-1/2 lg:pr-10 lg:py-2 mb-6 lg:mb-0">
+        <a class="mb-2" href="{% url 'strike.list' %}">Back to strikes</a>
+        <hr class="mb-2" />
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="border px-2 border-blue-500" type="submit">Strike!</button>
+        </form>
+      </div>
+    </div>
+    <!-- <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400"> -->
+  </div>
+  </div>
+</section>
+{% endblock content %}
