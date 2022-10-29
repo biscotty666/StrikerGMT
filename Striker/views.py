@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from django.db.models import Count
 from .models import Player, Strike, Guild, Toon
 from datetime import date, timedelta
 from .forms import PlayerModelForm, StrikeModelForm
@@ -75,14 +75,31 @@ class StrikeListView(ListView):
         context['strikes_legacy'] = Strike.objects.filter(strike_date__lt=ActiveDate).order_by('-strike_date')
         return context
 
+class ToonListView(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(gearLevel__gt=11)
+    print(queryset.values('toonLevel'))
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  context_object_name = 'toonsCount'
+
 class PlayerDetailView(DetailView):
   model = Player
-  # toons = Toon.objects.filter(player=pk_url_kwarg)
   context_object_name = 'player'
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    # print(self.kwargs)
     context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).order_by('-gp')
+    return context
+
+class ToonDetailView(DetailView):
+  model = Toon
+  # toons = Toon.objects.filter(player=pk_url_kwarg)
+  context_object_name = 'toon'
+  slug_field = 'toonName'
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    # print(self.kwargs)
+    context['players'] = Toon.objects.filter(toon=self.kwargs['toonName']).order_by('toonName')
     return context
       
       

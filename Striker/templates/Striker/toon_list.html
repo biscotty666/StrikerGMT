@@ -1,0 +1,27 @@
+{% extends './base.html' %}
+{% load humanize %}
+
+{% block content %}
+<section class="bg-black body-font">
+  <div class="container px-5 py-2 mx-auto flex flex-wrap">
+    <div class="-m-4">
+      <div class="p-4 md:w-full">
+        <h1 class="text-xl mb-2 mt-2 text-emerald-500">Toons</h1>
+        <hr class="mt-2" />
+        <div class="flex flex-wrap p-2 sm:flex-row">
+          {% for toon in toonsCount %}
+          <div class="box-border h-85 w-60 mb-1">
+            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2">
+              <div class="text-left">
+                <p class="leading-relaxed text-base">{{ toon.toonName }}</p>
+                <p class="leading-relaxed text-base">G12+: {{ toon.toonNameCount }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
