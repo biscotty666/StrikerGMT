@@ -1,12 +1,13 @@
 {% extends './base.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
 <section class="body-font overflow-hidden">
   <div class="px-5 py-24 mx-auto">
     <div class="mx-auto justify-items-start text-left">
       <div class="lg:w-1/2 lg:pr-10 lg:py-2 mb-6 lg:mb-0">
         <a class="mb-2" href="{% url 'strike.list' %}">Back to strikes</a>
         <hr class="mb-2" />
-        <form method="post">
+        <form class="text-slate-500" method="post">
           {% csrf_token %}
           {{ form.as_p }}
           <button class="border px-2 border-blue-500" type="submit">Strike!</button>

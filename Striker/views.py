@@ -81,6 +81,44 @@ class ToonListView(ListView):
     print(queryset.values('toonLevel'))
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = 'G12+'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView5s(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity__gt=5)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '5\u2B50+'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView6s(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity__gt=6)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '6\u2B50+'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView7s(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity=7)
+    print(queryset.values('toonLevel'))
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '7\u2B50'
+    return context
   context_object_name = 'toonsCount'
 
 class PlayerDetailView(DetailView):
@@ -174,6 +212,18 @@ def import_data(request):
   Toon.objects.all().delete()
   for player in players:
     print("Getting toon game data...")
+    #def GetData():
+      #try:
+        #response = client.get_data('player', player.allycode)
+        #if response == ' None ':
+          #print("Try again")
+          #GetData()
+        #return response
+      #except Exception as e:
+        #print("No response")
+        #time.sleep(15)
+        #GetData()
+    #GetData()
     response = client.get_data('player', player.allycode)
     with open('Striker/swgoh/json/player.json', 'w') as f:
       json.dump(response, f)
