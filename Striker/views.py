@@ -13,31 +13,6 @@ class HomeView(TemplateView):
 class ImportConfirmView(TemplateView):
   template_name = 'Striker/import_confirm.html'
   
-# def strike_create(request):
-#   form = StrikeModelForm()
-#   print(request)
-#   if request.method == "POST":
-#     form = StrikeModelForm(request.POST)
-#     if form.is_valid():
-#       form.save()
-#       return redirect('/strikes')
-#   context = {
-#     "form": form
-#   }
-#   return render(request, "Striker/strike_create.html", context)
-
-# def strike_detail(request, pk):
-#   strike = Strike.objects.get(id=pk)
-#   context = {
-#     "strike": strike
-#   }
-#   return render(request, 'Striker/strike_detail.html', context)
-
-# def strike_delete(request, pk):
-#   strike = Strike.objects.get(id=pk)
-#   strike.delete()
-#   return redirect('/strikes')
-
 class StrikeDeleteView(DeleteView):
   model = Strike
   success_url = reverse_lazy('strike.list')
@@ -68,7 +43,6 @@ def strike_update(request, pk):
 class StrikeCreateView(CreateView):
   model = Strike
   fields = ['player', 'strike_date', 'activity', 'ishard', 'comments']
-  # template_name = 'Striker/strike_create.html'
   success_url = '/striker/strikes'
 
 class PlayerListView(ListView):
@@ -88,7 +62,6 @@ class StrikeListView(ListView):
 class ToonListView(ListView):
   def get_queryset(self):
     queryset = Toon.objects.filter(gearLevel__gt=11)
-    print(queryset.values('toonLevel'))
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
