@@ -44,6 +44,8 @@ class Strike(models.Model):
   comments = models.TextField(max_length=200, blank=True)
   activity = models.CharField(max_length=10, choices=STRIKE_ACTIVITY)
   
+  
+  
   class Meta:
     ordering = ["-strike_date"]
   
