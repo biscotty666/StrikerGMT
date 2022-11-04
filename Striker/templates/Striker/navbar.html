@@ -3,13 +3,13 @@
     <div class="flex flex-wrap p-5 flex-col md:flex-row items-center">
       <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-2 md:mb-0">
 
-        <span class="ml-3 text-2xl text-emerald-500">Striker</span>
-      </a>
+        <span class="strikerbutton" role="button"><span class="text">Striker</span>
+      </a></br>
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center text-blue-500">
-        <a class="px-2 mx-1 border rounded border-emerald-500" href="{% url 'strike.list' %}">Strikes</a>
-        <a class="px-2 mx-1 border rounded border-emerald-500" href="{% url 'player.list' %}">Players</a>
-        <a class="px-2 mx-1 border rounded border-emerald-500" href="{% url 'toon.list' %}">Toons</a>
-        <a class="px-2 mx-1 border rounded border-emerald-500" href="{% url 'import.confirm' %}">Import</a>
+        <a href="{% url 'strike.list' %}" class="strikerbutton" role="button"><span class="text">Strikes</span></a>
+        <a href="{% url 'player.list' %}" class="strikerbutton" role="button"><span class="text">Players</span></a>
+        <a href="{% url 'toon.list' %}" class="strikerbutton" role="button"><span class="text">Toons</span></a>
+        <a href="{% url 'import.confirm' %}" class="strikerbutton" role="button"><span class="text">Import</span></a>
       </nav>
   </div>
 </div>

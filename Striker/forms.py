@@ -15,9 +15,9 @@ class StrikeModelForm(forms.ModelForm):
     )
     widgets = {
       'strike_date': widgets.DateInput(attrs={'type':'date'}),
-      'comments': Textarea(attrs={'cols': 40, 'rows': 5})
+      'comments': Textarea(attrs={'cols': 40, 'rows': 5}),
     }
-
+  
 
 class PlayerModelForm(forms.ModelForm):
   class Meta:
