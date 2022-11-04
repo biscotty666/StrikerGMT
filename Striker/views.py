@@ -20,7 +20,8 @@ class StrikeDeleteView(DeleteView):
 class StrikeUpdateView(UpdateView):
   model = Strike
   fields = ['player', 'strike_date', 'activity', 'ishard', 'comments']
-  template_name_suffix: '_update_form'
+  template_name_suffix = '_update_form'
+  success_url = reverse_lazy('strike.list')
   
 
 def strike_update(request, pk):
