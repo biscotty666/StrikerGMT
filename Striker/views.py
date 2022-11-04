@@ -4,7 +4,8 @@ from django.db.models import Count
 from .models import Player, Strike, Guild, Toon
 from datetime import date, timedelta
 from .forms import PlayerModelForm, StrikeModelForm
-from django.views.generic import CreateView, TemplateView, ListView, DetailView
+from django.views.generic import CreateView, TemplateView, ListView, DetailView, DeleteView, UpdateView
+from django.urls import reverse_lazy
 
 class HomeView(TemplateView):
   template_name = 'Striker/home.html'
@@ -12,31 +13,40 @@ class HomeView(TemplateView):
 class ImportConfirmView(TemplateView):
   template_name = 'Striker/import_confirm.html'
   
-def strike_create(request):
-  form = StrikeModelForm()
-  print(request)
-  if request.method == "POST":
-    print('Receiving a post request')
-    form = StrikeModelForm(request.POST)
-    if form.is_valid():
-      form.save()
-      return redirect('/strikes')
-  context = {
-    "form": form
-  }
-  return render(request, "Striker/strike_create.html", context)
+# def strike_create(request):
+#   form = StrikeModelForm()
+#   print(request)
+#   if request.method == "POST":
+#     form = StrikeModelForm(request.POST)
+#     if form.is_valid():
+#       form.save()
+#       return redirect('/strikes')
+#   context = {
+#     "form": form
+#   }
+#   return render(request, "Striker/strike_create.html", context)
 
-def strike_detail(request, pk):
-  strike = Strike.objects.get(id=pk)
-  context = {
-    "strike": strike
-  }
-  return render(request, 'Striker/strike_detail.html', context)
+# def strike_detail(request, pk):
+#   strike = Strike.objects.get(id=pk)
+#   context = {
+#     "strike": strike
+#   }
+#   return render(request, 'Striker/strike_detail.html', context)
 
-def strike_delete(request, pk):
-  strike = Strike.objects.get(id=pk)
-  strike.delete()
-  return redirect('/strikes')
+# def strike_delete(request, pk):
+#   strike = Strike.objects.get(id=pk)
+#   strike.delete()
+#   return redirect('/strikes')
+
+class StrikeDeleteView(DeleteView):
+  model = Strike
+  success_url = reverse_lazy('strike.list')
+
+class StrikeUpdateView(UpdateView):
+  model = Strike
+  fields = ['player', 'strike_date', 'activity', 'ishard', 'comments']
+  template_name_suffix: '_update_form'
+  
 
 def strike_update(request, pk):
   strike = Strike.objects.get(id=pk)
@@ -46,7 +56,7 @@ def strike_update(request, pk):
     form = StrikeModelForm(request.POST, instance=strike)
     if form.is_valid():
       form.save()
-      return redirect('/strikes')
+      return redirect('/striker/strikes')
   context = {
     "strike": strike,
     "form": form
@@ -58,8 +68,8 @@ def strike_update(request, pk):
 class StrikeCreateView(CreateView):
   model = Strike
   fields = ['player', 'strike_date', 'activity', 'ishard', 'comments']
-  template_name = 'Striker/strike_create.html'
-  success_url = '/strikes/'
+  # template_name = 'Striker/strike_create.html'
+  success_url = '/striker/strikes'
 
 class PlayerListView(ListView):
   model = Player
@@ -140,7 +150,10 @@ class ToonDetailView(DetailView):
     context['players'] = Toon.objects.filter(toon=self.kwargs['toonName']).order_by('toonName')
     return context
       
-      
+class StrikeDetailView(DetailView):
+  model = Strike
+  context_object_name = 'strike'
+        
 def import_data(request):
   from .swgohhelp import SWGOHhelp, settings
   import json

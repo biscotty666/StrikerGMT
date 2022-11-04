@@ -6,10 +6,10 @@
 
 <div class="row mx-5">
   <div class="col text-start">
-    <form action="{% url 'strike.new' %}" method="post">
+    <form method="post">
       {% csrf_token %}
-      {{ form }}
-      <button type="submit" class="btn btn-success">Update!</button>
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-success" value="Update">Update</button>
     </form>
   </div>
 </div>

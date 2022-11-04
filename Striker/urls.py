@@ -1,14 +1,15 @@
 from django.urls import path, include
 from . import views
-from .views import import_data, strike_create, strike_detail, strike_delete, strike_update
+from .views import import_data, strike_update
 
 urlpatterns = [
   path('', views.HomeView.as_view()),
   path('striker/', views.HomeView.as_view()),
-  path('striker/strikes/create/', strike_create, name='strike.create'),
-  path('striker/strikes/<int:pk>/', strike_detail, name='strike.detail' ),
-  path('striker/strikes/<int:pk>/update/', strike_update, name='strike.update' ),
-  path('striker/<int:pk>/delete/', strike_delete, name='strike.delete' ),
+  path('striker/strikes/create/', views.StrikeCreateView.as_view(), name='strike.create'),
+  path('striker/strikes/<int:pk>/', views.StrikeDetailView.as_view(), name='strike.detail' ),
+  path('striker/strikes/<int:pk>/update/', views.StrikeUpdateView.as_view(), name='strike.update' ),
+  # path('striker/strikes/<int:pk>/update/', strike_update, name='strike.update' ),
+  path('striker/<int:pk>/delete/', views.StrikeDeleteView.as_view(), name='strike.delete' ),
   path('striker/import/confirm', views.ImportConfirmView.as_view(), name='import.confirm'),
   path('striker/import/', import_data, name='import.data'),
   path('striker/players/', views.PlayerListView.as_view(), name='player.list'),
