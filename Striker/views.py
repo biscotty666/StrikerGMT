@@ -158,6 +158,7 @@ def import_data(request):
   with open('Striker/swgoh/json/guild.json', 'r') as f:
     guild = json.load(f)
     roster = guild[0]['roster']
+    guild = guild[0]
   
   if Guild.objects.filter(pk='1') == False:  
     new_guild = Guild(
