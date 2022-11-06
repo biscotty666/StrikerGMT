@@ -11,8 +11,7 @@
           {% for toon in toons %}
           <div class="box-border h-85 w-80 mb-1 flip-card">
             <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner "style="
-            border-image: linear-gradient(45deg, rgb(0 0 0), #23870a, #ff0000,#ff0000, #23870a, #000) 1;
-        ">
+            border-image: linear-gradient(135deg, #23870a, blue, #000 50%) 1;" onclick="myFunction()">
               <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
                 <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 ">{{ toon.toonName }}
                 </h2>
@@ -25,7 +24,7 @@
                 <p class="leading-relaxed text-base">Stars: {{ toon.rarity }}</p>
               </div>
             </div>
-              <div class = "flip-card-back text-left" style=" width: -webkit-fill-available;text-align: center; border-image: linear-gradient(45deg, rgb(0 0 0), #23870a, #ff0000,#ff0000, #23870a, #000) 1;">
+              <div class = "flip-card-back text-left" style=" width: -webkit-fill-available;text-align: center; border-image: linear-gradient(135deg, #23870a, blue, #000 50%) 1;">
                 <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 ">{{ toon.toonName }}
                 </h2>
                 <div class="grid-container-element">
@@ -42,7 +41,15 @@
                 </div>
 
               </div>
-            </div>
+            </div><script>
+              function myFunction() {
+                const card = document.querySelectorAll(".flip-card-inner");
+                card.forEach((card) => {
+                  card.addEventListener("click", () => {
+                    card.classList.toggle("is-flipped");
+                  });
+              })}
+            </script>
           
           </div>
           {% endfor %}
