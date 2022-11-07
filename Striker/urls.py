@@ -1,4 +1,7 @@
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 from . import views
 from .views import import_data, strike_update
 
@@ -22,4 +25,4 @@ urlpatterns = [
   path('striker/players/<int:pk>', views.PlayerDetailView.as_view(), name='player.detail'),
   path('striker/toons/<slug:toonName>/', views.ToonDetailView.as_view(), name='toon.detail'),
   path("__reload__/", include("django_browser_reload.urls")),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
