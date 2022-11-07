@@ -20,7 +20,6 @@
   justify-content: center;
   line-height: 1em;
   max-width: 100%;
-  min-width: 140px;
   padding: 3px;
   text-decoration: none;
   user-select: none;
@@ -52,7 +51,6 @@
 @media (min-width: 768px) {
   .strikerbutton {
     font-size: 24px;
-    min-width: 196px;
   }
 }
 
@@ -191,3 +189,14 @@
                  0 0 20px #fff, 
                  0 0 40px #fff;
   }
+
+
+.grid-container-element { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-gap: 30%; 
+  border: 1px solid black; 
+} 
+.grid-child-element { 
+  border: 1px solid rgba(255, 0, 0, 0); 
+}
