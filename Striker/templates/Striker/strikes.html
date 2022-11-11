@@ -1,0 +1,26 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="body-font overflow-hidden">
+  <div class="px-5 py-24 mx-auto">
+    <div class="mx-auto justify-items-start text-left">
+      <div class="lg:w-1/2 lg:pr-10 lg:py-2 mb-6 lg:mb-0">
+        <h3 class="text-center text-emerald-500 text-3xl">Strikes</h3>
+        <form class="text-slate-500" style="color: crimson;" method="post">
+          
+          {% csrf_token %}
+          {{ form.as_p }}
+          
+          <a class="border px-2 order-blue-500 strikerbutton" type="submit" value="Save"><span>Strike!</span></a>
+        </form>
+      </div>
+    </div>
+    <div id="strike-list">
+      {% include 'Striker/partials/strike-list.html' %}
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

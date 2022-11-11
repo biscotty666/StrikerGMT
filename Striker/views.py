@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, QueryDict
 from django.db.models import Count
 from .models import Player, Strike, Guild, Toon
 from datetime import date, timedelta
-from .forms import PlayerModelForm, StrikeModelForm
+from .forms import PlayerModelForm, StrikeModelForm, StrikeForm
 from django.views.generic import CreateView, TemplateView, ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 
@@ -132,6 +132,27 @@ class ToonDetailView(DetailView):
 class StrikeDetailView(DetailView):
   model = Strike
   context_object_name = 'strike'
+
+def strike_detail(request, pk):
+  strike = get_object_or_404(Strike, pk=pk)
+  context = {'strike': strike}
+  if request.method == 'GET':
+    return render(request, 'Striker/strike.html', context)
+  if request.method == 'PUT':
+    data = QueryDict(request.body).dict()
+    form = StrikeModelForm(data, instance=strike)
+    context = {'strike':strike, 'form':form}
+    if form.is_valid():
+      form.save()
+      return render(request, 'Striker/partials/strike-details.html', context)        
+    context = {'form':form}
+    return render(request, 'Striker/partials/edit-strike-form.html', context)
+
+def strike_edit(request, pk):
+  strike = get_object_or_404(Strike, pk=pk)
+  form = StrikeModelForm(instance=strike)
+  context = {'strike': strike, 'form':form}
+  return render(request, 'Striker/partials/edit-strike-form.html', context)
         
 def import_data(request):
   from .swgohhelp import SWGOHhelp, settings

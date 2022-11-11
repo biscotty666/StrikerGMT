@@ -3,18 +3,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from . import views
-from .views import import_data, strike_update
 
 urlpatterns = [
   path('', views.HomeView.as_view()),
   path('striker/', views.HomeView.as_view()),
   path('striker/strikes/create/', views.StrikeCreateView.as_view(), name='strike.create'),
-  path('striker/strikes/<int:pk>/', views.StrikeDetailView.as_view(), name='strike.detail' ),
-  path('striker/strikes/<int:pk>/update/', views.StrikeUpdateView.as_view(), name='strike.update' ),
+  path('striker/strikes/<int:pk>/', views.strike_detail, name='strike.detail' ),
+  path('striker/strikes/<int:pk>/edit', views.strike_edit, name='strike.edit.form'),
+  # path('striker/strikes/<int:pk>/', views.StrikeDetailView.as_view(), name='strike.detail' ),
+  # path('striker/strikes/<int:pk>/update/', views.StrikeUpdateView.as_view(), name='strike.update' ),
   # path('striker/strikes/<int:pk>/update/', strike_update, name='strike.update' ),
   path('striker/<int:pk>/delete/', views.StrikeDeleteView.as_view(), name='strike.delete' ),
   path('striker/import/confirm', views.ImportConfirmView.as_view(), name='import.confirm'),
-  path('striker/import/', import_data, name='import.data'),
+  path('striker/import/', views.import_data, name='import.data'),
   path('striker/players/', views.PlayerListView.as_view(), name='player.list'),
   path('striker/strikes/', views.StrikeListView.as_view(), name='strike.list'),
   path('striker/toons/', views.ToonListView.as_view(), name='toon.list'),
