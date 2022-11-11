@@ -26,3 +26,9 @@ urlpatterns = [
   path('striker/toons/<slug:toonName>/', views.ToonDetailView.as_view(), name='toon.detail'),
   path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+htmx_urlpatterns = [
+  path('striker/strikes/delete-strike/<int:pk>/', views.delete_strike, name='delete-strike'),
+]
+
+urlpatterns += htmx_urlpatterns

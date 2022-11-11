@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'theme',
     'crispy_forms',
     'import_export',
+    'django_htmx',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

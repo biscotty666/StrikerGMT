@@ -52,13 +52,18 @@ class PlayerListView(ListView):
   ordering = ['-gp']
 
 class StrikeListView(ListView):
+  template_name = 'Striker/strikes.html'
   model = Strike
-  def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        ActiveDate = date.today() - timedelta(days=30)
-        context['strikes_active'] = Strike.objects.filter(strike_date__gte=ActiveDate).order_by('-strike_date')
-        context['strikes_legacy'] = Strike.objects.filter(strike_date__lt=ActiveDate).order_by('-strike_date')
-        return context
+  context_object_name = 'strikes'
+  
+def delete_strike(request, pk):
+  strike = Strike.objects.get(pk=pk) 
+  print(strike)
+  strike.delete()
+  strikes = Strike.objects.all()
+  context = {'strikes': strikes}
+  # request.user.strike.remove(pk)
+  return render(request, 'Striker/partials/strike-list.html', context)
 
 class ToonListView(ListView):
   def get_queryset(self):
