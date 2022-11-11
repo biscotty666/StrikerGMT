@@ -10,12 +10,13 @@
         <div class="flex flex-wrap p-2 sm:flex-row">
           {% for toon in toons %}
           <div class="box-border h-85 w-80 mb-1 flip-card">
-            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner "style="
-            border-image: linear-gradient(135deg, #23870a, blue, #000 50%) 1;" onclick="myFunction()">
+            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner bordermildblue" onclick="myFunction()">
               <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
                 <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 ">{{ toon.toonName }}
                 </h2>
-                <div class="text-left ">
+                
+                <div class="text-left " >
+                  
                 <p class="leading-relaxed text-base">{{ toon.name }}</p>
                 <p class="leading-relaxed text-base">GP: {{ toon.gp|intcomma }}</p>
                 <p class="leading-relaxed text-base">Gear: {{ toon.gearLevel }}</p>
@@ -24,8 +25,8 @@
                 <p class="leading-relaxed text-base">Stars: {{ toon.rarity }}</p>
               </div>
             </div>
-              <div class = "flip-card-back text-left" style=" width: -webkit-fill-available;text-align: center; border-image: linear-gradient(135deg, #23870a, blue, #000 50%) 1;">
-                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 ">{{ toon.toonName }}
+              <div class = "flip-card-back text-left bordermildblue" >
+                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85" style = "text-align: center">{{ toon.toonName }}
                 </h2>
                 <div class="grid-container-element" style="
                 height: 47px;font-size: 10px;text-align: right">
