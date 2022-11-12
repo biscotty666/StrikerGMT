@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, QueryDict
 from django.db.models import Count
 from .models import Player, Strike, Guild, Toon
 from datetime import date, timedelta
-from .forms import PlayerModelForm, StrikeModelForm
+from .forms import PlayerModelForm, StrikeModelForm, StrikeForm
 from django.views.generic import CreateView, TemplateView, ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 
@@ -52,13 +52,33 @@ class PlayerListView(ListView):
   ordering = ['-gp']
 
 class StrikeListView(ListView):
+  template_name = 'Striker/strikes.html'
   model = Strike
-  def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        ActiveDate = date.today() - timedelta(days=30)
-        context['strikes_active'] = Strike.objects.filter(strike_date__gte=ActiveDate).order_by('-strike_date')
-        context['strikes_legacy'] = Strike.objects.filter(strike_date__lt=ActiveDate).order_by('-strike_date')
-        return context
+  context_object_name = 'strikes'
+  
+def strike_list(request):
+  strikes = Strike.objects.all()
+  if request.method == 'POST':
+    form = StrikeModelForm(request.POST)
+    if form.is_valid():
+      form.save()
+      strikes = Strike.objects.all()
+      context = {'form': form, 'strikes': strikes}
+      return render(request, 'Striker/partials/success.html')
+    else:
+      return render(request, 'Striker/partials/failure.html')
+  form = StrikeModelForm()
+  context = {'form': form, 'strikes': strikes}
+  return render(request, "Striker/strikes.html", context)
+  
+def delete_strike(request, pk):
+  strike = Strike.objects.get(pk=pk) 
+  print(strike)
+  strike.delete()
+  strikes = Strike.objects.all()
+  context = {'strikes': strikes}
+  # request.user.strike.remove(pk)
+  return render(request, 'Striker/partials/strike-list.html', context)
 
 class ToonListView(ListView):
   def get_queryset(self):
@@ -127,6 +147,28 @@ class ToonDetailView(DetailView):
 class StrikeDetailView(DetailView):
   model = Strike
   context_object_name = 'strike'
+
+def strike_detail(request, pk):
+  strike = get_object_or_404(Strike, pk=pk)
+  form = StrikeModelForm(instance=strike)
+  context = {'strike': strike, 'form': form}
+  if request.method == 'GET':
+    return render(request, 'Striker/strike.html', context)
+  if request.method == 'PUT':
+    data = QueryDict(request.body).dict()
+    form = StrikeModelForm(data, instance=strike)
+    context = {'strike':strike, 'form':form}
+    if form.is_valid():
+      form.save()
+      return render(request, 'Striker/partials/strike-details.html', context)        
+    context = {'form':form}
+    return render(request, 'Striker/partials/edit-strike-form.html', context)
+
+def strike_edit(request, pk):
+  strike = get_object_or_404(Strike, pk=pk)
+  form = StrikeModelForm(instance=strike)
+  context = {'strike': strike, 'form':form}
+  return render(request, 'Striker/partials/edit-strike-form.html', context)
         
 def import_data(request):
   from .swgohhelp import SWGOHhelp, settings

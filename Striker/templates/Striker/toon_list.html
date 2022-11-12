@@ -16,10 +16,10 @@
         </div>
         <div class="flex flex-wrap p-2 sm:flex-row">
           {% for toon in toonsCount %}
-          <div class="box-border h-85  mb-1" style = "width: 20rem">
-            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 bordermildblue">
+          <div class="box-border h-85  mb-1" style = "width: 20rem " id="{{ toon.toonName }}">
+            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 bordermildblue ">
               <div class="text-left">
-                <p class="leading-relaxed text-base">{{ toon.toonName }}</p>
+                <p class="leading-relaxed text-base " >{{ toon.toonName }}</p>
                 <p class="leading-relaxed text-base">{{ Label }}: {{ toon.toonNameCount }}</p>
               </div>
             </div>
