@@ -62,8 +62,11 @@ def strike_list(request):
     form = StrikeModelForm(request.POST)
     if form.is_valid():
       form.save()
+      strikes = Strike.objects.all()
+      context = {'form': form, 'strikes': strikes}
       return render(request, 'Striker/partials/success.html')
-    return render(request, 'Striker/partials/failure.html')
+    else:
+      return render(request, 'Striker/partials/failure.html')
   form = StrikeModelForm()
   context = {'form': form, 'strikes': strikes}
   return render(request, "Striker/strikes.html", context)
@@ -147,7 +150,8 @@ class StrikeDetailView(DetailView):
 
 def strike_detail(request, pk):
   strike = get_object_or_404(Strike, pk=pk)
-  context = {'strike': strike}
+  form = StrikeModelForm(instance=strike)
+  context = {'strike': strike, 'form': form}
   if request.method == 'GET':
     return render(request, 'Striker/strike.html', context)
   if request.method == 'PUT':

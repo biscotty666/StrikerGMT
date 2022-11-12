@@ -1,7 +1,9 @@
+<div class="m-6">
 <form hx-put="{% url 'strike.detail' strike.pk %}"
       hx-target="#strike-details"
       hx-swap="innerHTML">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+  <input type="submit" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-1.5 text-center mr-2 mb-2">
 </form>
+</div>
