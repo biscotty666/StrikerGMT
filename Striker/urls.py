@@ -7,7 +7,7 @@ from . import views
 urlpatterns = [
   path('', views.HomeView.as_view()),
   path('striker/', views.HomeView.as_view()),
-  path('striker/strikes/create/', views.StrikeCreateView.as_view(), name='strike.create'),
+  # path('striker/strikes/create/', views.StrikeCreateView.as_view(), name='strike.create'),
   path('striker/strikes/<int:pk>/', views.strike_detail, name='strike.detail' ),
   path('striker/strikes/<int:pk>/edit', views.strike_edit, name='strike.edit.form'),
   # path('striker/strikes/<int:pk>/', views.StrikeDetailView.as_view(), name='strike.detail' ),
@@ -17,7 +17,8 @@ urlpatterns = [
   path('striker/import/confirm', views.ImportConfirmView.as_view(), name='import.confirm'),
   path('striker/import/', views.import_data, name='import.data'),
   path('striker/players/', views.PlayerListView.as_view(), name='player.list'),
-  path('striker/strikes/', views.StrikeListView.as_view(), name='strike.list'),
+  path('striker/strikes/', views.strike_list, name='strike.list'),
+  # path('striker/strikes/', views.StrikeListView.as_view(), name='strike.list'),
   path('striker/toons/', views.ToonListView.as_view(), name='toon.list'),
   path('striker/toons5s/', views.ToonListView5s.as_view(), name='toon.list5s'),
   path('striker/toons6s/', views.ToonListView6s.as_view(), name='toon.list6s'),

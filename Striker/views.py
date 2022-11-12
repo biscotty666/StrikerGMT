@@ -56,6 +56,18 @@ class StrikeListView(ListView):
   model = Strike
   context_object_name = 'strikes'
   
+def strike_list(request):
+  strikes = Strike.objects.all()
+  if request.method == 'POST':
+    form = StrikeModelForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return render(request, 'Striker/partials/success.html')
+    return render(request, 'Striker/partials/failure.html')
+  form = StrikeModelForm()
+  context = {'form': form, 'strikes': strikes}
+  return render(request, "Striker/strikes.html", context)
+  
 def delete_strike(request, pk):
   strike = Strike.objects.get(pk=pk) 
   print(strike)

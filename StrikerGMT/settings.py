@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'import_export',
     'django_htmx',
+    'widget_tweaks',
 ]
 
 TAILWIND_APP_NAME = 'theme'
