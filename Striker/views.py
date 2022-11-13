@@ -57,7 +57,7 @@ class StrikeListView(ListView):
   context_object_name = 'strikes'
   
 def strike_list(request, **pk):
-  strikes = Strike.objects.all()
+  strikes = Strike.objects.all().order_by('player')
   if request.method == 'POST':
     if len(pk) == 0:
       form = StrikeModelForm(request.POST)
