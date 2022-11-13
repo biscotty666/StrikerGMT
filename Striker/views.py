@@ -84,7 +84,11 @@ def strike_list(request, **pk):
       strike.comments = result['comments']
       strike.save()
   form = StrikeModelForm()
-  context = {'form': form, 'strikes': strikes}
+  strikes = Strike.objects.all()
+  # counts = Strike.objects.annotate(num_strikes = Count('player', distinct=True))
+  counts = Player.objects.annotate(player_strikes = Count('strike'))
+  [print(count.player_strikes, count.name) for count in counts]
+  context = {'form': form, 'strikes': strikes, 'counts': counts}
   return render(request, "Striker/strikes.html", context)
   
 def delete_strike(request, pk):
