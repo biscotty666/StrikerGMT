@@ -2,13 +2,14 @@
 <section class="bg-black body-font">
   <div class="container px-5 py-2 mx-auto flex flex-wrap">
     <div class="-m-4">
-      <div>
-        {% for strikeCount in counts %}
-        {% if strikeCount.player_strikes > 0 %}
-        <p>{{ strikeCount.name }}: {{ strikeCount.player_strikes }} </p>
-        {% endif %}
-        {% endfor %}
-      </div>
+      <h1 class="text-5xl mb-2 mt-2 text-emerald-500">Strikes</h1>
+      <div class="">
+      {% for count in counts %}
+      {% if count.player_strikes > 0 %}
+      <p>{{ count.name }}: {{ count.player_strikes }}</p>
+      {% endif %}
+      {% endfor %}
+      <h1 class="text-xl mb-2 mt-2 text-emerald-500">Toons</h1>
       <div class="p-4 md:w-full">
         <div id="strike-list" class="flex flex-wrap p-2 sm:flex-row">
           {% for strike in strikes %}
