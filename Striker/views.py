@@ -56,19 +56,39 @@ class StrikeListView(ListView):
   model = Strike
   context_object_name = 'strikes'
   
-def strike_list(request):
-  strikes = Strike.objects.all()
+def strike_list(request, **pk):
+  strikes = Strike.objects.all().order_by('player')
   if request.method == 'POST':
-    form = StrikeModelForm(request.POST)
-    if form.is_valid():
-      form.save()
-      strikes = Strike.objects.all()
-      context = {'form': form, 'strikes': strikes}
-      return render(request, 'Striker/partials/success.html')
+    if len(pk) == 0:
+      form = StrikeModelForm(request.POST)
+      if form.is_valid():
+        form.save()
+        strikes = Strike.objects.all()
+        context = {'form': form, 'strikes': strikes}
+        return render(request, 'Striker/partials/success.html')
+      else:
+        return render(request, 'Striker/partials/failure.html')
     else:
-      return render(request, 'Striker/partials/failure.html')
+      pk = pk['pk']
+      strike, created = Strike.objects.get_or_create(id=pk)
+      body = request.body.decode("UTF-8")
+      result = dict((a.strip(), b.strip())
+                    for a, b in (element.split('=') 
+                                 for element in body.split('&')))
+      player = Player.objects.get(id=result['player'])
+      strike.player = player
+      strike.strike_date = result['strike_date']
+      strike.activity = result['activity']
+      ishard = True if 'ishard' in result else False
+      strike.ishard = ishard
+      strike.comments = result['comments']
+      strike.save()
   form = StrikeModelForm()
-  context = {'form': form, 'strikes': strikes}
+  strikes = Strike.objects.all()
+  # counts = Strike.objects.annotate(num_strikes = Count('player', distinct=True))
+  counts = Player.objects.annotate(player_strikes = Count('strike'))
+  [print(count.player_strikes, count.name) for count in counts]
+  context = {'form': form, 'strikes': strikes, 'counts': counts}
   return render(request, "Striker/strikes.html", context)
   
 def delete_strike(request, pk):
@@ -157,6 +177,9 @@ def strike_detail(request, pk):
   if request.method == 'PUT':
     data = QueryDict(request.body).dict()
     form = StrikeModelForm(data, instance=strike)
+    print("hello")
+    print(data)
+    print(form)
     context = {'strike':strike, 'form':form}
     if form.is_valid():
       form.save()
@@ -203,6 +226,17 @@ def import_data(request):
       gp = guild['gp'],
     )
     new_guild.save()
+  else:
+    guild = Guild.objects.get(pk='1')
+    guild.name = guild['name']
+    guild.desc = guild['desc']
+    guild.members = guild['members']
+    guild.status = guild['status']
+    guild.required = guild['required']
+    guild.bannerColor = guild['bannerColor']
+    guild.bannerLogo = guild['bannerLogo']
+    guild.message = guild['message']
+    guild.gp = guild['gp']
     
   all_players = Player.objects.all()
   for player in all_players:
