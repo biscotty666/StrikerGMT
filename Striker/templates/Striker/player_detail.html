@@ -11,8 +11,8 @@
           {% for toon in toons %}
           <div class="box-border h-85 w-80 mb-1 flip-card">
             <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner bordermildblue" onclick="myFunction()">
-              <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
-                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 ">{{ toon.toonName }}
+              <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;"id = "{{ toon.toonName }}">
+                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 " >{{ toon.toonName }}
                 </h2>
                 
                 <div class="text-left " >
