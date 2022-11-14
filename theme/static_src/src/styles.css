@@ -787,8 +787,338 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
-#DEATHTROOPER {
-  background-image: url(https://game-assets.swgoh.gg/tex.charui_trooperdeath.png);
+#JANGOFETT {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_jangofett.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#ENFYSNEST {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_enfys.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#KUIIL {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_kuiil.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#BB8 {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_bb8.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#FINN {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_finnjakku.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#ASAJVENTRESS {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ventress.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#SMUGGLERCHEWBACCA {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_tfa_chewbacca.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#LUKESKYWALKER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_luke_ep4.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#REY {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_reyjakku.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#DAKA {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_daka.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#MAGNAGUARD {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_magnaguard.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#DARTHSION {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_sion.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#STORMTROOPER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_trooperstorm.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#RESISTANCETROOPER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_resistancetrooper.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#NIGHTSISTERZOMBIE {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_nightsisters_zombie.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#MOTHERTALZIN {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_nightsisters_talzin.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#CARADUNE {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_caradune.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#VEERS {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_veers.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#ADMIRALACKBAR {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ackbaradmiral.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#K2SO {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_k2so.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#TALIA {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_nightsister_talia.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#CASSIANANDOR {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_cassian.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#MAUL {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_maul.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#WEDGEANTILLES {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_rebelpilot_wedge.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#CLONESERGEANTPHASEI {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_trooperclonegreen.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#THEMANDALORIANBESKARARMOR {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_mandobeskar.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#BIGGSDARKLIGHTER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_rebelpilot_biggs.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#ADMIRALRADDUS {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_admiralraddus.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#IG11 {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ig11_nurse.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#BOUSHH {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_boushh.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#JYNERSO {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_jyn.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#LOGRAY {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ewok_logray.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#EWOKSCOUT {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ewok_scout.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#BAZEMALBUS {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_bazemalbus.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#DARTHSIDIOUS {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_sidious.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#PAPLOO {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ewok_paploo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#SHORETROOPER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_troopershore.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#CHIRRUTIMWE {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_chirrut.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#HOTHREBELSOLDIER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_rebelhoth.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#POE {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_poe.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#SABINEWRENS3 {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_sabine_s3.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#RESISTANCEPILOT {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_resistancepilot.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#TIEFIGHTERPILOT {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_tiepilot.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#ROYALGUARD {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_royalguard.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#SECONDSISTER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_secondsister.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#IG86SENTINELDROID {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ig86.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#L3_37 {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_l337.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#TEEBO {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ewok_teebo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#HOTHLEIA {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_leiahoth.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#JEDIKNIGHTCONSULAR {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_jedi_consular_03.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#EIGHTHBROTHER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_eighthbrother.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#NINTHSISTER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_ninthsister.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#SEVENTHSISTER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_seventhsister.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#MOFFGIDEONS1 {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_moffgideon.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#KRRSANTAN {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_krrsantan.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#FENNECSHAND {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_fennec.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
