@@ -1,0 +1,59 @@
+{% extends './base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="body-font overflow-hidden">
+  <div class="px-5 py-24 mx-auto">
+    <div class="mb-4">
+      <a class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-1.5 text-center mr-2 mb-2" href="{% url 'strike.list' %}">Back to strikes</a>
+      </div>
+      
+      <!-- Modal toggle -->
+                <div id="information" class="mt-8 text-2xl"></div>
+
+      <!-- Main modal -->
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="py-6 px-6 lg:px-8">
+              <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Edit Strike</h3>
+              <form 
+                hx-post="{% url 'strike.list' strike.pk %}" 
+                hx-trigger="submit" 
+                hx-target="#information"
+                class="space-y-6" action="#">
+                <div>
+                  {% render_field form.player|add_label_class:"p-2" %}
+                  {% render_field form.player class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %}
+                </div>
+                <div>
+                  {% render_field form.strike_date|add_label_class:"p-2" %}
+                  {% render_field form.strike_date class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %}
+                </div>
+                <div>
+                  {% render_field form.activity|add_label_class:"p-2" %}
+                  {% render_field form.activity class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %}
+                </div>
+                <div>
+                  {% render_field form.ishard|add_label_class:"p-2" %}
+                  {% render_field form.ishard class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %}
+                </div>
+                <div>
+                  {% render_field form.comments|add_label_class:"p-2" %}
+                  {% render_field form.comments class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %}
+                </div>
+                <button type="submit"
+                  class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+    <div id="strike-list">
+      {% include 'Striker/partials/strike-list.html' %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

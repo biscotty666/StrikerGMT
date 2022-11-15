@@ -1,16 +1,16 @@
 <header class="text-gray-600 body-font">
   <div class="container mx-auto">
     <div class="flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-2 md:mb-0">
+      <a href="/striker" class="flex title-font font-medium items-center text-gray-900 mb-2 md:mb-0">
 
         <span class="strikerbutton" role="button"><span class="text" style = "background-image: url(https://cdn.dribbble.com/users/361263/screenshots/3051905/imperial_emblem.gif);background-position: center;
           background-size: contain;"></span>
       </a></br>
-      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center text-blue-500">
-        <a href="{% url 'strike.list' %}" class="strikerbutton" role="button"><span class="text">Strikes</span></a>
-        <a href="{% url 'player.list' %}" class="strikerbutton" role="button"><span class="text">Players</span></a>
-        <a href="{% url 'toon.list' %}" class="strikerbutton" role="button"><span class="text">Toons</span></a>
-        <a href="{% url 'import.confirm' %}" class="strikerbutton" role="button"><span class="text">Import</span></a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center text-blue-500 ">
+        <a href="{% url 'strike.list' %}" class="strikerbutton px-2" role="button"><span class="text">Strikes</span></a>
+        <a href="{% url 'player.list' %}" class="strikerbutton px-2" role="button"><span class="text">Players</span></a>
+        <a href="{% url 'toon.list' %}" class="strikerbutton px-2" role="button"><span class="text">Toons</span></a>
+        <a href="{% url 'import.confirm' %}" class="strikerbutton px-2" role="button"><span class="text">Import</span></a>
       </nav>
   </div>
 </div>

@@ -27,9 +27,12 @@ class Player(models.Model):
   guildMemberLevel = models.IntegerField()
   updated = models.CharField(max_length=30,blank=True)
   guild = models.ForeignKey(Guild, default=1, on_delete=models.CASCADE)
+
+  class Meta:
+    ordering = ['playerId']
   
   def __str__(self):
-    return f'{self.name}, GP: {self.gp}'
+    return f'{self.name}, playerId:{self.playerId}, GP: {self.gp}'
   
 class Strike(models.Model):
   STRIKE_ACTIVITY = (
@@ -50,7 +53,7 @@ class Strike(models.Model):
     ordering = ["-strike_date"]
   
   def __str__(self):
-    return f'{self.player}, {self.strike_date}, {self.ishard}, {self.activity}, {self.comments}'
+    return f'{self.pk}, {self.player}, {self.strike_date}, {self.ishard}, {self.activity}, {self.comments}'
 
 class Toon(models.Model):
   player = models.ForeignKey(Player, on_delete=models.CASCADE)

@@ -1,0 +1,33 @@
+{% extends './base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<section class="text-slate-200 body-font overflow-hidden">
+  <div class="px-5 py-24 mx-auto">
+    <div class="mx-auto flex flex-wrap">
+      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-2 mb-6 lg:mb-0">
+        <a class="mb-2" href="{% url 'strike.list' %}">Back to strikes</a>
+        <hr />
+        <!-- <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2> -->
+        <div class="flex mb-4">
+          <a href="{% url 'strike.detail' strike.pk %}"
+            class="flex-grow text-indigo-500 border-b-2 border-emerald-500 py-2 text-lg px-1">Description</a>
+          <a href="{% url 'strike.update' strike.pk %}"
+            class="flex-grow py-2 text-lg px-1  border-b-2 border-gray-300 ">Update</a>
+        </div>
+
+        <div class="row mx-5">
+          <div class="col text-start">
+            <form method="post" class="text-emerald-500">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-success" value="Update">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

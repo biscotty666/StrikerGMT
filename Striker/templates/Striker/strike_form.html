@@ -3,8 +3,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<<<<<<< Updated upstream
-=======
 <section class="body-font overflow-hidden">
   <div class="px-5 py-24 mx-auto">
     <div class="mx-auto justify-items-start text-left">
@@ -16,23 +14,12 @@
           {% csrf_token %}
           {{ form.as_p }}
           
-          <a class="border px-2 border-blue-500 strikerbutton" type="submit" value="Save"><span>Strike!</span></a>
+          <a href="{% url 'strike.new' %}" class="border px-2 border-blue-500 strikerbutton" type="submit" value="Save"><span>Strike!</span></a>
         </form>
       </div>
     </div>
   </div>
 </section>
->>>>>>> Stashed changes
 
-<div class="row mx-5">
-  <div class="col text-start">
-    <form action="{% url 'strike.new' %}" method="post">
-      {% csrf_token %}
-      {{ form }}
-      <button type="submit" class="btn btn-success">Strike!</button>
-    </form>
-  </div>
-</div>
-  
+
 {% endblock content %}
-  
