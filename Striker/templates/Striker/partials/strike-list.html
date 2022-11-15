@@ -9,7 +9,6 @@
       <p>{{ count.name }}: {{ count.player_strikes }}</p>
       {% endif %}
       {% endfor %}
-      <h1 class="text-xl mb-2 mt-2 text-emerald-500">Toons</h1>
       <div class="p-4 md:w-full">
         <div id="strike-list" class="flex flex-wrap p-2 sm:flex-row">
           {% for strike in strikes %}
@@ -28,6 +27,7 @@
                 <button class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-3 py-1.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                    hx-delete="{% url 'delete-strike' strike.pk %}"
                    hx-target="#strike-list"
+                   hx-swap="outerHTML"
                    hx-trigger="click"
                    hx-confirm="Are you sure you want to delete the strike?"
                 >X</button>
