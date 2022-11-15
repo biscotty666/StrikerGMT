@@ -167,7 +167,6 @@ class PlayerDetailView(DetailView):
     context = super().get_context_data(**kwargs)
     context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(gearLevel__gt=1).order_by('-gp')
     context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(gearLevel__gt=1).order_by('-gp')
-    print(context['ships'])
     return context
 
 class ToonDetailView(DetailView):

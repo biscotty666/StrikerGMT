@@ -5,6 +5,10 @@
 #id_strike_date{
   type: date
 }
+[x-cloak] {
+  display: none;
+}
+
 /* CSS */
 .strikerbutton {
   align-items: center;
