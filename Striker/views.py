@@ -165,7 +165,9 @@ class PlayerDetailView(DetailView):
   context_object_name = 'player'
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).order_by('-gp')
+    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(gearLevel__gt=1).order_by('-gp')
+    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(gearLevel__gt=1).order_by('-gp')
+    print(context['ships'])
     return context
 
 class ToonDetailView(DetailView):
@@ -269,7 +271,7 @@ def import_data(request):
     print("Getting toon game data...")
     def GetData():
       try:
-        print(f'Trying player endpoint for {player.allycode}')
+        print(f'Trying player endpoint for {player.name}, {player.allycode}')
         response = client.get_data('player', player.allycode)
         return response
       except Exception as e:
@@ -295,7 +297,6 @@ def import_data(request):
       else:
         pus=toon['primaryUnitStat']      
       all_toons = Toon.objects.all()
-      # if toon not in Toon.objects.all() and toon['gear']>1:
       new_toon = Toon(
           player = player,
           toonID = toon['id'],
@@ -310,14 +311,5 @@ def import_data(request):
        )    
       new_toon.save()
       print(f"{new_toon.toonName} saved")
-      # else:
-        # getToon = Toon.objects.filter(nameKey=toon['nameKey'])
-        # print(f"here is the toon: {getToon}")
-        # getToon.rarity = toon['rarity']
-        # getToon.toonLevel = toon['level']
-        # getToon.gp = toon['gp']
-        # getToon.gearLevel = toon['gear']
-        # getToon.relic = relic
-        # print(f"{getToon} updated")
 
   return render(request, 'Striker/import_success.html')
