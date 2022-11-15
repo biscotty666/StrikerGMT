@@ -12,18 +12,21 @@
           <div class="box-border h-85 w-80 mb-1 flip-card">
             <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner bordermildblue" onclick="myFunction()">
               <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
-                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 ">{{ toon.toonName }}
+                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 " style = "margin-bottom: 10px;">{{ toon.toonName }}
                 </h2>
-                
-                <div class="text-left " >
+                <div style = "margin: 15px auto 10px;width: 146px;display: block;">
+                  <div id = "{{ toon.toonName }}" style="height: 132px; border-radius: 50%; width: 136px;">
+                  <div id = "gear{{ toon.gearLevel }}" style ="height: 136px;width: 136px;">
+                  <div id = "relic{{ toon.relic }}" style ="height: 136px;width: 136px;">
+                  <div id = "star{{ toon.rarity }}" style="height: 136px; width: 136px; position: relative;bottom: 17px;">
+                    
+              <div class="text-left ">
                   
-                <p class="leading-relaxed text-base">{{ toon.name }}</p>
-                <p class="leading-relaxed text-base">GP: {{ toon.gp|intcomma }}</p>
-                <p class="leading-relaxed text-base">Gear: {{ toon.gearLevel }}</p>
-                <p class="leading-relaxed text-base">Relic: {{ toon.relic }}</p>
-                <p class="leading-relaxed text-base">Level: {{ toon.toonLevel }}</p>
-                <p class="leading-relaxed text-base">Stars: {{ toon.rarity }}</p>
-              </div>
+              <p class="leading-relaxed text-base">{{ toon.name }}</p>
+              <p class="leading-relaxed text-base"style="    position: relative;left: 28px;top: 145px;">GP: {{ toon.gp|intcomma }}</p>
+              <p class="leading-relaxed text-base"style = "position: relative;left: 112px;top: 78px"> {{ toon.relic }}</p>
+              <p class="leading-relaxed text-base"style="position: relative; left: 55px;top: 65px;font-size: x-large;color: black;font-weight: bold;">{{ toon.toonLevel }}</p>
+              </div></div></div></div></div></div>
             </div>
               <div class = "flip-card-back text-left bordermildblue" >
                 <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85" style = "text-align: center">{{ toon.toonName }}
