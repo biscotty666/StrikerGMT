@@ -1123,3 +1123,276 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+#NIGHTSISTERSPIRIT {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_nightsisters_wraith.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#DARKTROOPER {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_darktrooper.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#SAVAGEOPRESS {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_savageopress.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#JAWA {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_jawa_jawa.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#CLONEWARSCHEWBACCA {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_chewbacca.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#T3_M4 {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_t3m4.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#PLOKOON {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_plokoon.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#JEDIKNIGHTGUARDIAN {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_jedi_guardian_01.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#gear0 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g0.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear1 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g1.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear2 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear3 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g3.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear4 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g4.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear5 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g5.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear6 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g6.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear7 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g7.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear8 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g8.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear9 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g9.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear10 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g10.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear11 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g11.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear12 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g12.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+#gear13 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0.5;
+}
+
+
+
+#relic1 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+#relic2 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+#relic3 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+#relic4 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+#relic5 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+#relic6 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+#relic7 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+#relic8 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+#relic9 {
+  background-image: url(https://swgohteammanager.com/images/public/gear-icon-g13-ds-relic.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+
+
+
+
+#star7 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity7.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#star6 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity6.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#star5 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity5.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#star4 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity4.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#star3 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity3.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#star2 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#star1 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity1.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#star0 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity0.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
