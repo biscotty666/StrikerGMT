@@ -48,12 +48,6 @@
 .strikerbutton:hover span {
   background: none;
 }
-  
-@media (min-width: 768px) {
-  .strikerbutton {
-    font-size: 24px;
-  }
-}
 
 .button-85 {
   padding: none;

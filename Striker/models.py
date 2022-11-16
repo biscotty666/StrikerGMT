@@ -66,7 +66,7 @@ class Toon(models.Model):
   gearLevel = models.IntegerField()
   primaryUnitStat = models.IntegerField()
   relic = models.IntegerField()
-  
+  combatType = models.IntegerField(blank=True)
   def __str__(self):
     return f'{self.toonName}'
   
