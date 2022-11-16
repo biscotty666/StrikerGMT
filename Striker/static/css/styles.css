@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#id_strike_date{
-  type: date
-}
 [x-cloak] {
   display: none;
 }
@@ -2165,4 +2162,8 @@
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 2;
+}
+
+.nodisplay {
+  display: none;
 }

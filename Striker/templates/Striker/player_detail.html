@@ -3,14 +3,14 @@
 
 {% block content %}
 <section class="bg-black body-font">
-  <div class="container px-5 py-2 mx-auto flex flex-wrap">
+  <div class="container px-5 py-2 mx-auto flex flex-wrap" style="justify-content: center;">
     <div class="-m-4">
       <div class="p-4 md:w-full">
         <h1 class="text-2xl mb-2 mt-2 text-emerald-500 ">{{ player.name }}</h1>
         <div class="m-8" x-data="{showToons: false}">
           <button @click="showToons = !showToons"
             class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button" data-modal-toggle="toon-list">
+            type="button" data-modal-toggle="toon-list" style = "position: absolute; top: 140px; left: 200px;">
             Show/Hide toons
           </button>
           <div x-show="showToons" id="toon-list" tabindex="-1" aria-hidden="true" x-cloak 
@@ -28,7 +28,7 @@
                       style="margin-bottom: 10px;">{{ toon.toonName }}
                     </h2>
                     <div style="margin: 15px auto 10px;width: 146px;display: block;">
-                      <div id="{{ toon.toonName }}" style="height: 132px; border-radius: 50%; width: 136px;">
+                      <div id="C-{{ toon.toonName }}" style="height: 132px; border-radius: 50%; width: 136px;">
                         <div id="gear{{ toon.gearLevel }}" style="height: 136px;width: 136px;">
                           <div id="relic{{ toon.relic }}" style="height: 136px;width: 136px;">
                             <div id="star{{ toon.rarity }}"
@@ -50,17 +50,6 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="flip-card-back text-left bordermildblue">
-                    <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85"
-                      style="text-align: center">{{ toon.toonName }}
-                    </h2>
-                    <div class="grid-container-element" style="
-                height: 47px;font-size: 10px;text-align: right">
-                  <div class="grid-child-element purple" style="background-image: url(https://wiki.swgoh.help/images/b/b7/Mod-Transmitter-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
                   </div>
                   <div class="flip-card-back text-left bordermildblue">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85"
@@ -119,7 +108,7 @@
                     const card = document.querySelectorAll(".flip-card-inner");
                     card.forEach((card) => {
                       card.addEventListener("click", () => {
-                        card.classList.toggle("is-flipped");
+                        card._x_isShown.toggle("true");
                       });
                     })
                   }
@@ -133,10 +122,10 @@
         <div class="m-8" x-data="{showShips: false}">
           <button @click="showShips = !showShips"
             class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button" data-modal-toggle="toon-list">
+            type="button" data-modal-toggle="toon-list" style = "position: absolute; top: 140px; right: 200px;">
             Show/Hide ships
           </button>
-          <div x-cloak x-show="showShips" id="ship-list" tabindex="-1" aria-hidden="true"
+          <div x-cloak x-show="showShips" id="ship-list" tabindex="-1" aria-hidden="false"
             class="overflow-y-auto overflow-x-hidden p-4 w-full md:inset-0 h-modal md:h-full">
             <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Ships</h1>
             <div class="flex flex-wrap p-2 sm:flex-row">
@@ -150,7 +139,7 @@
                       style="margin-bottom: 10px;">{{ toon.toonName }}
                     </h2>
                     <div style="margin: 15px auto 10px;width: 146px;display: block;">
-                      <div id="{{ toon.toonName }}" style="height: 132px; border-radius: 50%; width: 136px;">
+                      <div id="C-{{ toon.toonName }}"  style="height: 132px; border-radius: 50%; width: 136px;">
                         <div id="gear{{ toon.gearLevel }}" style="height: 136px;width: 136px;">
                           <div id="relic{{ toon.relic }}" style="height: 136px;width: 136px;">
                             <div id="star{{ toon.rarity }}"
@@ -161,9 +150,6 @@
                                 <p class="leading-relaxed text-base">{{ toon.name }}</p>
                                 <p class="leading-relaxed text-base"
                                   style="    position: relative;left: 28px;top: 145px;">GP: {{ toon.gp|intcomma }}</p>
-                                <p class="leading-relaxed text-base" style="position: relative;left: 112px;top: 78px">
-                                  {{
-                                  toon.relic }}</p>
                                 <p class="leading-relaxed text-base"
                                   style="position: relative; left: 55px;top: 65px;font-size: x-large;color: black;font-weight: bold;">
                                   {{ toon.toonLevel }}</p>
@@ -233,6 +219,14 @@
                     card.forEach((card) => {
                       card.addEventListener("click", () => {
                         card.classList.toggle("is-flipped");
+                      });
+                    })
+                  }
+                  function showships() {
+                    const ship = document.querySelectorAll("#ship-list");
+                    ship.forEach((ship) => {
+                      ship.addEventListener("click", () => {
+                        ship.classList.toggle("nodisplay");
                       });
                     })
                   }
