@@ -10,14 +10,14 @@
         <div class="m-8" x-data="{showToons: false}">
           <button @click="showToons = !showToons"
             class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button" data-modal-toggle="toon-list" style = "position: absolute; top: 140px; left: 200px;">
+            type="button" data-modal-toggle="toon-list" style = "position: absolute; top: 290px; left: 200px;">
             Show/Hide toons
           </button>
           <div x-show="showToons" id="toon-list" tabindex="-1" aria-hidden="true" x-cloak 
             class="overflow-y-auto overflow-x-hidden p-4 w-full md:inset-0 h-modal md:h-full">
             <!-- <div id="toon-list"> -->
             <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Toons</h1>
-            <div class="flex flex-wrap p-2 sm:flex-row">
+            <div class="flex flex-wrap p-2 sm:flex-row"style = "top: 150px; position: relative; justify-content: center;">
               {% for toon in toons %}
               <div class="box-border h-85 w-80 mb-1 flip-card">
                 <div
@@ -42,7 +42,7 @@
                                 <p class="leading-relaxed text-base" style="position: relative;left: 112px;top: 78px">
                                   {{ toon.relic }}</p>
                                 <p class="leading-relaxed text-base"
-                                  style="position: relative; left: 55px;top: 65px;font-size: x-large;color: black;font-weight: bold;">
+                                  style="position: relative; left: 55px;top: 65px;font-size: x-large;color: white;font-weight: bold;">
                                   {{ toon.toonLevel }}</p>
                               </div>
                             </div>
@@ -122,13 +122,13 @@
         <div class="m-8" x-data="{showShips: false}">
           <button @click="showShips = !showShips"
             class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button" data-modal-toggle="toon-list" style = "position: absolute; top: 140px; right: 200px;">
+            type="button" data-modal-toggle="toon-list" style = "position: absolute; top: 290px; right: 200px;">
             Show/Hide ships
           </button>
           <div x-cloak x-show="showShips" id="ship-list" tabindex="-1" aria-hidden="false"
             class="overflow-y-auto overflow-x-hidden p-4 w-full md:inset-0 h-modal md:h-full">
             <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Ships</h1>
-            <div class="flex flex-wrap p-2 sm:flex-row">
+            <div class="flex flex-wrap p-2 sm:flex-row" style = "top: 150px; position: relative; justify-content: center;">
               {% for toon in ships %}
               <div class="box-border h-85 w-80 mb-1 flip-card">
                 <div
@@ -139,19 +139,17 @@
                       style="margin-bottom: 10px;">{{ toon.toonName }}
                     </h2>
                     <div style="margin: 15px auto 10px;width: 146px;display: block;">
-                      <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" style="height: 132px; border-radius: 50%; width: 136px;">
-                        <div id="gear{{ toon.gearLevel }}" style="height: 136px;width: 136px;">
-                          <div id="relic{{ toon.relic }}" style="height: 136px;width: 136px;">
-                            <div id="star{{ toon.rarity }}"
-                              style="height: 136px; width: 136px; position: relative;bottom: 17px;">
+                      <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" class="px136">
+                        <div  class = "px136">
+                          <div id="relic{{ toon.relic }}" class = "px136">
+                            <div id="combatType{{ toon.combatType }}star{{ toon.rarity }}"
+                              style="height: 136px; width: 136px; position: relative;bottom: 2px;">
 
                               <div class="text-left ">
-
-                                <p class="leading-relaxed text-base">{{ toon.name }}</p>
                                 <p class="leading-relaxed text-base"
-                                  style="    position: relative;left: 28px;top: 145px;">GP: {{ toon.gp|intcomma }}</p>
+                                  style="    position: relative;left: 28px;top: 118px;">GP: {{ toon.gp|intcomma }}</p>
                                 <p class="leading-relaxed text-base"
-                                  style="position: relative; left: 55px;top: 65px;font-size: x-large;color: black;font-weight: bold;">
+                                  style="position: relative; left: 55px;top: 65px;font-size: x-large;color: white;font-weight: bold;">
                                   {{ toon.toonLevel }}</p>
                               </div>
                             </div>

@@ -17,7 +17,6 @@
   color: #FFFFFF;
   display: flex;
   font-family: Phantomsans, sans-serif;
-  font-size: 20px;
   justify-content: center;
   line-height: 1em;
   max-width: 100%;
@@ -214,7 +213,12 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
-
+#C-DARTHMALGUS {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_darthmalgus.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 #C-AHSOKATANO {
   background-image: url(https://game-assets.swgoh.gg/tex.charui_ahsoka.png);
   background-position: center;
@@ -1856,7 +1860,7 @@
   background-size: contain;
 }
 #C-BLADEOFDORIN {
-  background-image: url();
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_jedi_fighter_bladeofdorin.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -1927,8 +1931,18 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
-
-
+#C-TIEINTERCEPTOR {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_tie_interceptor_prototype.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#C-SITHINFILTRATOR {
+  background-image: url(https://game-assets.swgoh.gg/tex.charui_sithinfiltrator.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 
 
@@ -2160,4 +2174,73 @@
 
 .nodisplay {
   display: none;
+}
+.px136 {
+  height: 136px;
+  width: 136px;
+}
+.combatType2 {
+  width: 140px;
+  height: 140px;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: 0.5s;
+  z-index: 2;
+}
+
+
+#combatType2star7 {
+  background-image: url(https://swgohteammanager.com/images/public/ship_rarity7.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#combatType2star6 {
+  background-image: url(https://swgohteammanager.com/images/public/ship_rarity6.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#combatType2star5 {
+  background-image: url(https://swgohteammanager.com/images/public/ship_rarity5.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#combatType2star4 {
+  background-image: url(https://swgohteammanager.com/images/public/ship_rarity4.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#combatType2star3 {
+  background-image: url(https://swgohteammanager.com/images/public/ship_rarity3.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#combatType2star2 {
+  background-image: url(https://swgohteammanager.com/images/public/ship_rarity2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#combatType2star1 {
+  background-image: url(https://swgohteammanager.com/images/public/ship_rarity1.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+#combatType2star0 {
+  background-image: url(https://swgohteammanager.com/images/public/rarity0.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
 }
