@@ -67,6 +67,8 @@ class Toon(models.Model):
   primaryUnitStat = models.IntegerField()
   relic = models.IntegerField()
   combatType = models.IntegerField(blank=True)
+  crew = models.CharField(max_length=45, blank=True)
+  isZeta = models.CharField(max_length=45, blank=True)
   def __str__(self):
     return f'{self.toonName}'
   

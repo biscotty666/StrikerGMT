@@ -361,7 +361,8 @@ def import_data(request):
       if toon['primaryUnitStat']==None:
         pus=0
       else:
-        pus=toon['primaryUnitStat']      
+        pus=toon['primaryUnitStat']
+      
       all_toons = Toon.objects.all()
       new_toon = Toon(
           player = player,
@@ -373,10 +374,14 @@ def import_data(request):
           gp = toon['gp'],
           gearLevel = toon['gear'],
           combatType = toon['combatType'],
+          crew = [i['unitId'] for i in toon['crew']],
+          isZeta = [i['isZeta'] for i in toon['skills']],
           primaryUnitStat = pus,
           relic = relic,
-       )    
+       )
+      
       new_toon.save()
       print(f"{new_toon.toonName} saved")
+      print([i['unitId'] for i in toon['crew']])
 
   return render(request, 'Striker/import_success.html')

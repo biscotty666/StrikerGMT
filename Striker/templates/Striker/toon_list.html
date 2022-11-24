@@ -26,11 +26,11 @@
         </div>
         <div class="flex flex-wrap p-2 sm:flex-row">
           {% for toon in toonsCount %}
-          <div class="box-border h-85  mb-1" style = "width: 20rem " >
+          <div class="box-border h-85  mb-1" style = "width: 20rem;height: 6.2rem " >
             <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 bordermildblue "id="C-{{ toon.toonName }}">
-              <div class="text-left">
-                <p class="leading-relaxed text-base " >{{ toon.toonName }}</p>
-                <p class="leading-relaxed text-base">{{ Label }}: {{ toon.toonNameCount }}</p>
+              <div class="text-left" style = "width: 100px;height: 78px;position: relative">
+                <p class="leading-relaxed text-base " style = "overflow-wrap: break-word;font-size: small;">{{ toon.toonName }}</p>
+                <p class="leading-relaxed text-base" style = "position: absolute;bottom: -5px;">{{ Label }}: {{ toon.toonNameCount }}</p>
               </div>
             </div>
           </div>

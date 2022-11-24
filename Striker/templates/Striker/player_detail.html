@@ -14,7 +14,7 @@
             Show/Hide toons
           </button>
           <div x-show="showToons" id="toon-list" tabindex="-1" aria-hidden="true" x-cloak 
-            class="overflow-y-auto overflow-x-hidden p-4 w-full md:inset-0 h-modal md:h-full">
+            class="p-4 w-full md:inset-0 h-modal md:h-full">
             <!-- <div id="toon-list"> -->
             <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Toons</h1>
             <div class="flex flex-wrap p-2 sm:flex-row"style = "top: 150px; position: relative; justify-content: center;">
@@ -25,7 +25,7 @@
                   onclick="myFunction()">
                   <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 "
-                      style="margin-bottom: 10px;">{{ toon.toonName }}
+                      style="margin-bottom: 10px;font-size: 15px;;">{{ toon.toonName }}
                     </h2>
                     <div style="margin: 15px auto 10px;width: 146px;display: block;">
                       <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" style="height: 132px; border-radius: 50%; width: 136px;">
@@ -35,8 +35,6 @@
                               style="height: 136px; width: 136px; position: relative;bottom: 17px;">
 
                               <div class="text-left ">
-
-                                <p class="leading-relaxed text-base">{{ toon.name }}</p>
                                 <p class="leading-relaxed text-base"
                                   style="    position: relative;left: 28px;top: 145px;">GP: {{ toon.gp|intcomma }}</p>
                                 <p class="leading-relaxed text-base" style="position: relative;left: 112px;top: 78px">
@@ -53,7 +51,7 @@
                   </div>
                   <div class="flip-card-back text-left bordermildblue">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85"
-                      style="text-align: center">{{ toon.toonName }}
+                      style="text-align: center;font-size: 15px;">{{ toon.toonName }}
                     </h2>
                     <div class="grid-container-element" style="
                 height: 47px;font-size: 10px;text-align: right">
@@ -126,7 +124,7 @@
             Show/Hide ships
           </button>
           <div x-cloak x-show="showShips" id="ship-list" tabindex="-1" aria-hidden="false"
-            class="overflow-y-auto overflow-x-hidden p-4 w-full md:inset-0 h-modal md:h-full">
+            class="p-4 w-full md:inset-0 h-modal md:h-full">
             <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Ships</h1>
             <div class="flex flex-wrap p-2 sm:flex-row" style = "top: 150px; position: relative; justify-content: center;">
               {% for toon in ships %}
@@ -136,7 +134,7 @@
                   onclick="myFunction()">
                   <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 "
-                      style="margin-bottom: 10px;">{{ toon.toonName }}
+                      style="margin-bottom: 10px;font-size: 15px;">{{ toon.toonName }}
                     </h2>
                     <div style="margin: 15px auto 10px;width: 146px;display: block;">
                       <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" class="px136">
@@ -160,52 +158,40 @@
                   </div>
                   <div class="flip-card-back text-left bordermildblue">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85"
-                      style="text-align: center">
+                      style="text-align: center;font-size: 15px;">
                       {{ toon.toonName }}
                     </h2>
                     <div class="grid-container-element" style="
                 height: 47px;font-size: 10px;text-align: right">
                       <div class="grid-child-element purple"
                         style="background-image: url(https://wiki.swgoh.help/images/b/b7/Mod-Transmitter-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                        <strong>Primary</strong></br>
-                        Stat2 Stat3</br>
-                        stat4 Stat5</br>
+                        
                       </div>
-                      <div class="grid-child-element green"
+                      <div class="grid-child-element green " 
                         style="background-image: url(https://wiki.swgoh.help/images/9/93/Mod-Receiver-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                        <strong>Primary</strong></br>
-                        Stat2 Stat3</br>
-                        stat4 Stat5</br>
+                        {{ toon.isZeta }}
                       </div>
                     </div>
                     <div class="grid-container-element" style="
                 height: 47px;font-size: 10px;text-align: right">
                       <div class="grid-child-element purple"
                         style="background-image: url(https://wiki.swgoh.help/images/a/a5/Mod-Processor-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                        <strong>Primary</strong></br>
-                        Stat2 Stat3</br>
-                        stat4 Stat5</br>
+                        
                       </div>
                       <div class="grid-child-element green"
                         style="background-image: url(https://wiki.swgoh.help/images/d/da/Mod-Holo-Array-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                        <strong>Primary</strong></br>
-                        Stat2 Stat3</br>
-                        stat4 Stat5</br>
+                        
                       </div>
                     </div>
                     <div class="grid-container-element" style="
                 height: 47px;font-size: 10px;text-align: right">
                       <div class="grid-child-element purple"
                         style="background-image: url(https://wiki.swgoh.help/images/c/ce/Mod-Data-Bus-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                        <strong>Primary</strong></br>
-                        Stat2 Stat3</br>
-                        stat4 Stat5</br>
+                        
                       </div>
-                      <div class="grid-child-element green"
+                      <div class="grid-child-element green "
                         style="background-image: url(https://wiki.swgoh.help/images/c/c8/Mod-Multiplexer-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                        <strong>Primary</strong></br>
-                        Stat2 Stat3</br>
-                        stat4 Stat5</br>
+                        
                       </div>
                     </div>
 
