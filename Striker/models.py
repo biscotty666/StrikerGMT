@@ -69,6 +69,7 @@ class Toon(models.Model):
   combatType = models.IntegerField(blank=True)
   crew = models.CharField(max_length=45, blank=True)
   isZeta = models.CharField(max_length=45, blank=True)
+  forceAlignment = models.IntegerField(blank=True, default = 0)
   def __str__(self):
     return f'{self.toonName}'
   

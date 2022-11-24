@@ -375,7 +375,7 @@ def import_data(request):
           gearLevel = toon['gear'],
           combatType = toon['combatType'],
           crew = [i['unitId'] for i in toon['crew']],
-          isZeta = [i['isZeta'] for i in toon['skills']],
+          isZeta = str([i['isZeta'] for i in toon['skills']]).count('True'),
           primaryUnitStat = pus,
           relic = relic,
        )
@@ -383,5 +383,6 @@ def import_data(request):
       new_toon.save()
       print(f"{new_toon.toonName} saved")
       print([i['unitId'] for i in toon['crew']])
+      print(str([i['isZeta'] for i in toon['skills']]).count('True'))
 
   return render(request, 'Striker/import_success.html')
