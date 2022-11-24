@@ -126,9 +126,41 @@ class ToonListView(ListView):
     return context
   context_object_name = 'toonsCount'
 
+class ToonListViewR0(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(gearLevel__gt=12)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = 'G13+'
+    return context
+  context_object_name = 'toonsCount'
+class ToonListViewR1(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(relic__gt=1).exclude(relic__gt=6)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = 'R1-R5'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListViewR6(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(relic__gt=6)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = 'R6+'
+    return context
+  context_object_name = 'toonsCount'
+
 class ToonListView5s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity__gt=5)
+    queryset = Toon.objects.filter(rarity__gt=5).exclude(combatType=2)
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
@@ -139,7 +171,7 @@ class ToonListView5s(ListView):
 
 class ToonListView6s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity__gt=6)
+    queryset = Toon.objects.filter(rarity__gt=6).exclude(combatType=2)
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
@@ -150,7 +182,41 @@ class ToonListView6s(ListView):
 
 class ToonListView7s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity=7)
+    queryset = Toon.objects.filter(rarity=7).exclude(combatType=2)
+    print(queryset.values('toonLevel'))
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '7\u2B50'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView5sShip(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity__gt=5).exclude(combatType=1)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '5\u2B50+'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView6sShip(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity__gt=6).exclude(combatType=1)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '6\u2B50+'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView7sShip(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity=7).exclude(combatType=1)
     print(queryset.values('toonLevel'))
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
@@ -165,8 +231,8 @@ class PlayerDetailView(DetailView):
   context_object_name = 'player'
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(gearLevel__gt=1).order_by('-gp')
-    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(gearLevel__gt=1).order_by('-gp')
+    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType=1).order_by('-gp')
+    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(combatType=1).order_by('-gp')
     return context
 
 class ToonDetailView(DetailView):
@@ -287,6 +353,7 @@ def import_data(request):
 
     for toon in roster:
       relic = toon['relic']
+      
       if toon['relic']==None or toon['relic']['currentTier']==1:
         relic=0
       else:
@@ -294,7 +361,8 @@ def import_data(request):
       if toon['primaryUnitStat']==None:
         pus=0
       else:
-        pus=toon['primaryUnitStat']      
+        pus=toon['primaryUnitStat']
+      
       all_toons = Toon.objects.all()
       new_toon = Toon(
           player = player,
@@ -305,10 +373,15 @@ def import_data(request):
           toonLevel = toon['level'],
           gp = toon['gp'],
           gearLevel = toon['gear'],
+          combatType = toon['combatType'],
+          crew = [i['unitId'] for i in toon['crew']],
+          isZeta = [i['isZeta'] for i in toon['skills']],
           primaryUnitStat = pus,
-          relic = relic
-       )    
+          relic = relic,
+       )
+      
       new_toon.save()
       print(f"{new_toon.toonName} saved")
+      print([i['unitId'] for i in toon['crew']])
 
   return render(request, 'Striker/import_success.html')

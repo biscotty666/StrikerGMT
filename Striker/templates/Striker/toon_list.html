@@ -5,22 +5,32 @@
 <section class="bg-black body-font text-slate-200 overflow-hidden">
   <div class="container px-5 py-2 mx-auto flex flex-wrap">
     <div class="ms-auto flex flex-wrap">
-      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-2 mb-6 lg:mb-0">
+      <div class=" w-full lg:pr-10 lg:py-2 mb-6 lg:mb-0">
         <h1 class="text-xl mb-2 mt-2 text-emerald-500">Toons</h1>
         <hr class="mt-2" />
         <div class="flex mb-4">
+          <a href="{% url 'toon.listR6' %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">R6-R9</a>
+          <a href="{% url 'toon.listR1' %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">R1-R5</a>
+          <a href="{% url 'toon.listR0' %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">G13</a>
           <a href="{% url 'toon.list' %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">G12+</a>
           <a href="{% url 'toon.list7s' %}" class="flex-grow py-2 text-lg px-1 border-b-2 border-gray-300">7⭐</a>
           <a href="{% url 'toon.list6s' %}" class="flex-grow py-2 text-lg px-1 border-b-2 border-gray-300">6⭐+</a>
           <a href="{% url 'toon.list5s' %}" class="flex-grow py-2 text-lg px-1 border-b-2 border-gray-300">5⭐+</a>
         </div>
+        <h1 class="text-xl mb-2 mt-2 text-emerald-500">Ships</h1>
+        <hr class="mt-2" />
+        <div class="flex mb-4">
+          <a href="{% url 'toon.list7sShip' %}" class="flex-grow py-2 text-lg px-1 border-b-2 border-gray-300">7⭐</a>
+          <a href="{% url 'toon.list6sShip' %}" class="flex-grow py-2 text-lg px-1 border-b-2 border-gray-300">6⭐+</a>
+          <a href="{% url 'toon.list5sShip' %}" class="flex-grow py-2 text-lg px-1 border-b-2 border-gray-300">5⭐+</a>
+        </div>
         <div class="flex flex-wrap p-2 sm:flex-row">
           {% for toon in toonsCount %}
-          <div class="box-border h-85  mb-1" style = "width: 20rem " >
-            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 bordermildblue "id="{{ toon.toonName }}">
-              <div class="text-left">
-                <p class="leading-relaxed text-base " >{{ toon.toonName }}</p>
-                <p class="leading-relaxed text-base">{{ Label }}: {{ toon.toonNameCount }}</p>
+          <div class="box-border h-85  mb-1" style = "width: 20rem;height: 6.2rem " >
+            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 bordermildblue "id="C-{{ toon.toonName }}">
+              <div class="text-left" style = "width: 100px;height: 78px;position: relative">
+                <p class="leading-relaxed text-base " style = "overflow-wrap: break-word;font-size: small;">{{ toon.toonName }}</p>
+                <p class="leading-relaxed text-base" style = "position: absolute;bottom: -5px;">{{ Label }}: {{ toon.toonNameCount }}</p>
               </div>
             </div>
           </div>
