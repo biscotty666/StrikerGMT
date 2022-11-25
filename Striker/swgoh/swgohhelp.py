@@ -66,6 +66,36 @@ class SWGOHhelp():
             data = {"message": 'Cannot fetch data'}
         return data
     
+    def getVersion(self):
+        data_url = self.urlBase + '/version'
+        try:
+            r = requests.get(data_url)
+            if r.status_code != 200:
+                data = {"status_code": r.status_code,
+                        "message": "Unable to fetch version"}
+            else:
+                data = loads(r.content.decode('utf-8'))
+        except Exception as e:
+            data = {"message": 'Cannot fetch version', "exception": str(e)}
+        return data
+
+    def fetchAPI(self, url, payload):
+        self._get_access_token()
+        head = {'Content-Type': 'application/json', 'Authorization': self.token['Authorization']}
+        data_url = self.urlBase + url
+        try:
+            r = requests.request('POST', data_url, headers=head, data=dumps(payload))
+            if r.status_code != 200:
+                # error = 'Cannot fetch data - error code'
+                error = r.content.decode('utf-8')
+                data = {"status_code": r.status_code,
+                        "message": error}
+            else:
+                data = loads(r.content.decode('utf-8'))
+        except Exception as e:
+            data = {"message": 'Cannot fetch data', "exception": str(e)}
+        return data
+
     def fetchZetas(self):
         try:
             return self.fetchAPI(self.endpoints['zetas'], {})
@@ -161,6 +191,7 @@ class SWGOHhelp():
             return self.fetchAPI(self.endpoints['roster'], payload)
         except Exception as e:
             return str(e)
+
     
 
 class settings():
