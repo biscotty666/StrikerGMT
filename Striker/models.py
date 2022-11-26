@@ -114,4 +114,19 @@ class Equipped(models.Model):
   def __str__(self):
     return f'Gear: {self.nameKey}' 
  
+class ShipCrew(models.Model):
+  toon = models.ForeignKey(Toon, on_delete=models.CASCADE)
+  unitId = models.CharField(max_length=40, blank=True) 
+  skillId = models.CharField(max_length=40, blank=True) 
+  skillessCrewAbilityId = models.CharField(max_length=35, blank=True) 
+  slot = models.SmallIntegerField(blank=True)
+  requiredTier = models.SmallIntegerField(blank=True)
+  requiredRarity = models.SmallIntegerField(blank=True)
+  requiredRelicTier = models.SmallIntegerField(blank=True)
+  gp = models.SmallIntegerField(blank=True)
+  cp = models.DecimalField(max_digits=10, decimal_places=5)
+  
+  def __str__(self):
+    return f'Crew: {self.unitId}, GP: {self.gp}, CP: {self.cp}'
+
 
