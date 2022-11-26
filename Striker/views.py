@@ -374,8 +374,8 @@ def import_data(request):
           gp = toon['gp'],
           gearLevel = toon['gear'],
           combatType = toon['combatType'],
-          crew = [i['unitId'] for i in toon['crew']],
-          isZeta = [i['isZeta'] for i in toon['skills']],
+          crew = str([i['unitId'] for i in toon['crew']]).replace('[','').replace(']','').replace("'","").replace("'","").replace("'","").replace("'","").split(','),
+          isZeta = str([i['isZeta'] for i in toon['skills']]).count('True'),
           primaryUnitStat = pus,
           relic = relic,
        )

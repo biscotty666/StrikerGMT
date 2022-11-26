@@ -69,7 +69,49 @@ class Toon(models.Model):
   combatType = models.IntegerField(blank=True)
   crew = models.CharField(max_length=45, blank=True)
   isZeta = models.CharField(max_length=45, blank=True)
+  forceAlignment = models.CharField(max_length=45, blank=True)
   def __str__(self):
     return f'{self.toonName}'
   
+class Mod(models.Model):
+  toon = models.ForeignKey(Toon, on_delete=models.CASCADE)
+  modId = models.CharField(max_length=30)
+  modLevel = models.SmallIntegerField()
+  tier = models.SmallIntegerField()
+  set = models.SmallIntegerField()
+  pips = models.SmallIntegerField()
+  
+  def __str__(self):
+    return f'{self.modId}, {self.modLevel}, {self.tier}, {self.set}, {self.pips}'
+  
+class ModStat(models.Model):
+  mod = models.ForeignKey(Mod, on_delete=models.CASCADE)
+  statType = models.CharField(max_length=1, default='P')
+  unitStat = models.CharField(max_length=30, default='')
+  value = models.DecimalField(max_digits=10, decimal_places=5)
+  roll = models.SmallIntegerField(default=0)
+  
+  def __str__(self):
+    return f'{self.statType}, {self.unitStat}, {self.value}, {self.roll}'
+  
+class Skill(models.Model):
+  toon = models.ForeignKey(Toon, on_delete=models.CASCADE)
+  skillId = models.CharField(max_length=30)
+  tier = models.SmallIntegerField()
+  nameKey = models.CharField(max_length=30)
+  isZeta = models.BooleanField(default=False)
+  tiers = models.SmallIntegerField()
+
+  def __str__(self):
+    return f'Skill: {self.skillId}, Tier: {self.tier}, Skill Name: {self.nameKey}, Zeta: {self.isZeta}'
+
+class Equipped(models.Model):
+  toon = models.ForeignKey(Toon, on_delete=models.CASCADE)
+  equipmentId = models.CharField(max_length=6, blank=True)
+  slot = models.SmallIntegerField(blank=True)
+  nameKey = models.CharField(max_length=35, blank=True) 
+  
+  def __str__(self):
+    return f'Gear: {self.nameKey}' 
+ 
 
