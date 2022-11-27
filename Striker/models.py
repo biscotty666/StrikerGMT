@@ -24,7 +24,7 @@ class Player(models.Model):
   gpChar = models.IntegerField()
   gpShip = models.IntegerField()
   active = models.BooleanField(default=True)
-  guildMemberLevel = models.IntegerField()
+  guildMemberLevel = models.CharField(max_length=20, blank=True)
   updated = models.CharField(max_length=30,blank=True)
   guild = models.ForeignKey(Guild, default=1, on_delete=models.CASCADE)
 
@@ -62,12 +62,72 @@ class Toon(models.Model):
   nameKey = models.CharField(max_length=45)
   rarity = models.IntegerField()
   toonLevel = models.IntegerField()
+  xp = models.IntegerField(default=0)
   gp = models.IntegerField()
   gearLevel = models.IntegerField()
   primaryUnitStat = models.IntegerField()
   relic = models.IntegerField()
-  
+  combatType = models.CharField(max_length=30, blank=True)
+  crew = models.CharField(max_length=45, blank=True)
+  isZeta = models.CharField(max_length=45, blank=True)
+  forceAlignment = models.CharField(max_length=45, blank=True)
   def __str__(self):
     return f'{self.toonName}'
   
+class Mod(models.Model):
+  toon = models.ForeignKey(Toon, on_delete=models.CASCADE)
+  modId = models.CharField(max_length=30)
+  modLevel = models.SmallIntegerField()
+  tier = models.SmallIntegerField()
+  set = models.SmallIntegerField()
+  pips = models.SmallIntegerField()
+  
+  def __str__(self):
+    return f'{self.modId}, {self.modLevel}, {self.tier}, {self.set}, {self.pips}'
+  
+class ModStat(models.Model):
+  mod = models.ForeignKey(Mod, on_delete=models.CASCADE)
+  statType = models.CharField(max_length=1, default='P')
+  unitStat = models.CharField(max_length=30, default='')
+  value = models.DecimalField(max_digits=10, decimal_places=5)
+  roll = models.SmallIntegerField(default=0)
+  
+  def __str__(self):
+    return f'{self.statType}, {self.unitStat}, {self.value}, {self.roll}'
+  
+class Skill(models.Model):
+  toon = models.ForeignKey(Toon, on_delete=models.CASCADE)
+  skillId = models.CharField(max_length=30)
+  tier = models.SmallIntegerField()
+  nameKey = models.CharField(max_length=30)
+  isZeta = models.BooleanField(default=False)
+  tiers = models.SmallIntegerField()
+
+  def __str__(self):
+    return f'Skill: {self.skillId}, Tier: {self.tier}, Skill Name: {self.nameKey}, Zeta: {self.isZeta}'
+
+class Equipped(models.Model):
+  toon = models.ForeignKey(Toon, on_delete=models.CASCADE)
+  equipmentId = models.CharField(max_length=6, blank=True)
+  slot = models.SmallIntegerField(blank=True)
+  nameKey = models.CharField(max_length=35, blank=True) 
+  
+  def __str__(self):
+    return f'Gear: {self.nameKey}' 
+ 
+class ShipCrew(models.Model):
+  toon = models.ForeignKey(Toon, on_delete=models.CASCADE)
+  unitId = models.CharField(max_length=40, blank=True) 
+  skillId = models.CharField(max_length=40, blank=True) 
+  skillessCrewAbilityId = models.CharField(max_length=35, blank=True) 
+  slot = models.SmallIntegerField(blank=True)
+  requiredTier = models.SmallIntegerField(blank=True)
+  requiredRarity = models.SmallIntegerField(blank=True)
+  requiredRelicTier = models.SmallIntegerField(blank=True)
+  gp = models.SmallIntegerField(blank=True)
+  cp = models.DecimalField(max_digits=10, decimal_places=5)
+  
+  def __str__(self):
+    return f'Crew: {self.unitId}, GP: {self.gp}, CP: {self.cp}'
+
 
