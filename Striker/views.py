@@ -231,8 +231,8 @@ class PlayerDetailView(DetailView):
   context_object_name = 'player'
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType=1).order_by('-gp')
-    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(combatType=1).order_by('-gp')
+    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType='CHARACTER').order_by('-gp')
+    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(combatType='SHIP').order_by('-gp')
     return context
 
 class ToonDetailView(DetailView):
