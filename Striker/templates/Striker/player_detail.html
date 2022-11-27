@@ -2,178 +2,225 @@
 {% load humanize %}
 
 {% block content %}
-<section class="bg-black body-font">
-  <div class="container px-5 py-2 mx-auto flex flex-wrap">
+<section class="bg-black body-font" >
+  <div class="container px-5 py-2 mx-auto flex flex-wrap" style="justify-content: center;">
     <div class="-m-4">
       <div class="p-4 md:w-full">
         <h1 class="text-2xl mb-2 mt-2 text-emerald-500 ">{{ player.name }}</h1>
-        
-        <div id="toon-list">
-        <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Toons</h1>
-        <div class="flex flex-wrap p-2 sm:flex-row">
-          {% for toon in toons %}
-          <div class="box-border h-85 w-80 mb-1 flip-card">
-            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner bordermildblue" onclick="myFunction()">
-              <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
-                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 " style = "margin-bottom: 10px;">{{ toon.toonName }}
-                </h2>
-                <div style = "margin: 15px auto 10px;width: 146px;display: block;">
-                  <div id = "{{ toon.toonName }}" style="height: 132px; border-radius: 50%; width: 136px;">
-                  <div id = "gear{{ toon.gearLevel }}" style ="height: 136px;width: 136px;">
-                  <div id = "relic{{ toon.relic }}" style ="height: 136px;width: 136px;">
-                  <div id = "star{{ toon.rarity }}" style="height: 136px; width: 136px; position: relative;bottom: 17px;">
-                    
-              <div class="text-left ">
+        <div class="m-8" x-data="{showToons: false}">
+          <button @click="showToons = !showToons"
+            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button" data-modal-toggle="toon-list" style = "position: absolute; top: 290px; left: 200px;">
+            Show/Hide toons
+          </button>
+          <div x-show="showToons" id="toon-list" tabindex="-1" aria-hidden="true" x-cloak 
+            class="p-4 w-full md:inset-0 h-modal md:h-full" >
+            <!-- <div id="toon-list"> -->
+            <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Toons</h1>
+            <div class="flex flex-wrap p-2 sm:flex-row"style = "top: 150px; position: relative; justify-content: center;">
+              {% for toon in toons %}
+              <div class="box-border h-85 w-80 mb-1 flip-card">
+                <div onload = "myFunction1()"
+                  class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner bordermildblue"
+                  onclick="myFunction()">
+                  <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
+                    <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 "
+                      style="margin-bottom: 10px;font-size: 15px;;" onclick = "myFunction1()">{{ toon.toonName }}
+                    </h2>
+                    <div style="margin: 15px auto 10px;width: 146px;display: block;">
+                      <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" style="height: 132px; border-radius: 50%; width: 136px;">
+                        <div id="gear{{ toon.gearLevel }}" style="height: 136px;width: 136px;">
+                          <div class="relic{{ toon.relic }} relic{{ toon.relic }}{{ toon.toonName }} " >
+                            <div id="star{{ toon.rarity }}"
+                              style="height: 136px; width: 136px; position: relative;bottom: 17px;">
+                              
+                              
+                                <div class="text-left ">
+                                  <p class="leading-relaxed text-base"
+                                style="    position: relative;left: 28px;top: 145px;">GP: {{ toon.gp|intcomma }}</p>
+                                  <p class="leading-relaxed text-base" id= "reliccount{{ toon.relic }}">
+                                {{ toon.relic }}</p>
+                                  <p class="leading-relaxed text-base"
+                                style="position: relative; left: 55px;top: 65px;font-size: x-large;color: white;font-weight: bold;">
+                                {{ toon.toonLevel }}</p>
+                                  <p id = "zetacount{{ toon.isZeta }}" class="leading-relaxed text-base" >
+                                  {{ toon.isZeta }}</p>
+                              <div id="zeta{{ toon.isZeta }}" style = "height: 39px; width: 39px; position: absolute;bottom: -6px;"> 
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card-back text-left bordermildblue">
+                    <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85"
+                      style="text-align: center;font-size: 15px;">{{ toon.toonName }}
+                    </h2>
+                    <div class="grid-container-element" style="
+                height: 47px;font-size: 10px;text-align: right">
+                      <div class="grid-child-element purple"
+                        style="background-image: url(https://wiki.swgoh.help/images/b/b7/Mod-Transmitter-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
+                        <strong>Primary</strong></br>
+                        Stat2 Stat3</br>
+                        stat4 Stat5</br>
+                      </div>
+                      <div class="grid-child-element green"
+                        style="background-image: url(https://wiki.swgoh.help/images/9/93/Mod-Receiver-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
+                        <strong>Primary</strong></br>
+                        Stat2 Stat3</br>
+                        stat4 Stat5</br>
+                      </div>
+                    </div>
+                    <div class="grid-container-element" style="
+                height: 47px;font-size: 10px;text-align: right">
+                      <div class="grid-child-element purple"
+                        style="background-image: url(https://wiki.swgoh.help/images/a/a5/Mod-Processor-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
+                        <strong>Primary</strong></br>
+                        Stat2 Stat3</br>
+                        stat4 Stat5</br>
+                      </div>
+                      <div class="grid-child-element green"
+                        style="background-image: url(https://wiki.swgoh.help/images/d/da/Mod-Holo-Array-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
+                        <strong>Primary</strong></br>
+                        Stat2 Stat3</br>
+                        stat4 Stat5</br>
+                      </div>
+                    </div>
+                    <div class="grid-container-element" style="
+                height: 47px;font-size: 10px;text-align: right">
+                      <div class="grid-child-element purple"
+                        style="background-image: url(https://wiki.swgoh.help/images/c/ce/Mod-Data-Bus-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
+                        <strong>Primary</strong></br>
+                        Stat2 Stat3</br>
+                        stat4 Stat5</br>
+                      </div>
+                      <div class="grid-child-element green"
+                        style="background-image: url(https://wiki.swgoh.help/images/c/c8/Mod-Multiplexer-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
+                        <strong>Primary</strong></br>
+                        Stat2 Stat3</br>
+                        stat4 Stat5</br>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <script>
+                  function myFunction() {
+                    const card = document.querySelectorAll(".flip-card-inner");
+                    card.forEach((card) => {
+                      card.addEventListener("click", () => {
+                        card.classList.toggle("is-flipped");
+                      });
+                    })
+                  }
                   
-              <p class="leading-relaxed text-base">{{ toon.name }}</p>
-              <p class="leading-relaxed text-base"style="    position: relative;left: 28px;top: 145px;">GP: {{ toon.gp|intcomma }}</p>
-              <p class="leading-relaxed text-base"style = "position: relative;left: 112px;top: 78px"> {{ toon.relic }}</p>
-              <p class="leading-relaxed text-base"style="position: relative; left: 55px;top: 65px;font-size: x-large;color: white;font-weight: bold;height: 32px;
-              width: 30px;font-weight: bold; text-align: center">{{ toon.toonLevel }}</p>
-              </div></div></div></div></div></div>
-            </div>
-              <div class = "flip-card-back text-left bordermildblue" >
-                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85" style = "text-align: center">{{ toon.toonName }}
-                </h2>
-                <div class="grid-container-element" style="
-                height: 47px;font-size: 10px;text-align: right">
-                  <div class="grid-child-element purple" style="background-image: url(https://wiki.swgoh.help/images/b/b7/Mod-Transmitter-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                  <div class="grid-child-element green" style="background-image: url(https://wiki.swgoh.help/images/9/93/Mod-Receiver-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                </div>
-                <div class="grid-container-element" style="
-                height: 47px;font-size: 10px;text-align: right">
-                  <div class="grid-child-element purple"style="background-image: url(https://wiki.swgoh.help/images/a/a5/Mod-Processor-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                  <div class="grid-child-element green"style="background-image: url(https://wiki.swgoh.help/images/d/da/Mod-Holo-Array-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                </div>
-                <div class="grid-container-element" style="
-                height: 47px;font-size: 10px;text-align: right">
-                  <div class="grid-child-element purple"style="background-image: url(https://wiki.swgoh.help/images/c/ce/Mod-Data-Bus-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                  <div class="grid-child-element green"style="background-image: url(https://wiki.swgoh.help/images/c/c8/Mod-Multiplexer-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                </div>
+                </script>
 
               </div>
-            </div><script>
-              function myFunction() {
-                const card = document.querySelectorAll(".flip-card-inner");
-                card.forEach((card) => {
-                  card.addEventListener("click", () => {
-                    card.classList.toggle("is-flipped");
-                  });
-              })}
-            </script>
-          
-          </div>
-          {% endfor %}
-        </div>
-        </div>
-        <div id="ship-list">
-        <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Ships</h1>
-        <div class="flex flex-wrap p-2 sm:flex-row">
-          {% for toon in ships %}
-          <div class="box-border h-85 w-80 mb-1 flip-card">
-            <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner bordermildblue" onclick="myFunction()">
-              <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
-                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 " style = "margin-bottom: 10px;">{{ toon.toonName }}
-                </h2>
-                <div style = "margin: 15px auto 10px;width: 146px;display: block;">
-                  <div id = "{{ toon.toonName }}" style="height: 132px; border-radius: 50%; width: 136px;">
-                  <div id = "gear{{ toon.gearLevel }}" style ="height: 136px;width: 136px;">
-                  <div id = "relic{{ toon.relic }}" style ="height: 136px;width: 136px;">
-                  <div id = "star{{ toon.rarity }}" style="height: 136px; width: 136px; position: relative;bottom: 17px;">
-                    
-              <div class="text-left ">
-                  
-              <p class="leading-relaxed text-base">{{ toon.name }}</p>
-              <p class="leading-relaxed text-base"style="    position: relative;left: 28px;top: 145px;">GP: {{ toon.gp|intcomma }}</p>
-              <p class="leading-relaxed text-base"style = "position: relative;left: 112px;top: 78px"> {{ toon.relic }}</p>
-              <p class="leading-relaxed text-base"style="position: relative; left: 55px;top: 65px;font-size: x-large;color: black;font-weight: bold;">{{ toon.toonLevel }}</p>
-              </div></div></div></div></div></div>
+              {% endfor %}
             </div>
-              <div class = "flip-card-back text-left bordermildblue" >
-                <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85" style = "text-align: center">{{ toon.toonName }}
-                </h2>
-                <div class="grid-container-element" style="
-                height: 47px;font-size: 10px;text-align: right">
-                  <div class="grid-child-element purple" style="background-image: url(https://wiki.swgoh.help/images/b/b7/Mod-Transmitter-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
+          </div>
+        </div>
+        <div class="m-8" x-data="{showShips: false}">
+          <button @click="showShips = !showShips"
+            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button" data-modal-toggle="toon-list" style = "position: absolute; top: 290px; right: 200px;">
+            Show/Hide ships
+          </button>
+          <div x-cloak x-show="showShips" id="ship-list" tabindex="-1" aria-hidden="false"
+            class="p-4 w-full md:inset-0 h-modal md:h-full">
+            <h1 class="text-2xl mb-2 mt-2 text-emerald-500">Ships</h1>
+            <div class="flex flex-wrap p-2 sm:flex-row" style = "top: 150px; position: relative; justify-content: center;">
+              {% for toon in ships %}
+              <div class="box-border h-85 w-80 mb-1 flip-card">
+                <div
+                  class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 flip-card-inner bordermildblue"
+                  onclick="myFunction()">
+                  <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
+                    <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 "
+                      style="margin-bottom: 10px;font-size: 15px;">{{ toon.toonName }}
+                    </h2>
+                    <div style="margin: 15px auto 10px;width: 146px;display: block;">
+                      <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" class="px136">
+                        <div  class = "px136">
+                          <div id="relic{{ toon.relic }}" class = "px136">
+                            <div id="combatType{{ toon.combatType }}star{{ toon.rarity }}"
+                              style="height: 136px; width: 136px; position: relative;bottom: 2px;">
+
+                              <div class="text-left ">
+                                <p class="leading-relaxed text-base"
+                                  style="    position: relative;left: 28px;top: 118px;">GP: {{ toon.gp|intcomma }}</p>
+                                <p class="leading-relaxed text-base"
+                                  style="position: relative; left: 55px;top: 65px;font-size: x-large;color: white;font-weight: bold;">
+                                  {{ toon.toonLevel }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="grid-child-element green" style="background-image: url(https://wiki.swgoh.help/images/9/93/Mod-Receiver-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
+                  <div class="flip-card-back text-left bordermildblue">
+                    <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85"
+                      style="text-align: center;font-size: 15px;">
+                      {{ toon.toonName }}
+                    </h2>
+                    <div class="grid-container-element" style="
+                height: 47px;font-size: 10px;text-align: right">
+                      <div class="grid-child-element purple" id = {{ toon.crew }}
+                        >
+                        {{ toon.crew }}
+                      </div>
+                      <div class="grid-child-element green " 
+                        >
+                        
+                      </div>
+                    </div>
+                    <div class="grid-container-element" style="
+                height: 47px;font-size: 10px;text-align: right">
+                      <div class="grid-child-element purple"
+                        >
+                        
+                      </div>
+                      <div class="grid-child-element green"
+                        >
+                        
+                      </div>
+                    </div>
+                    <div class="grid-container-element" style="
+                height: 47px;font-size: 10px;text-align: right">
+                      <div class="grid-child-element purple"
+                        >
+                        
+                      </div>
+                      <div class="grid-child-element green "
+                        >
+                        
+                      </div>
+                    </div>
+
                   </div>
                 </div>
-                <div class="grid-container-element" style="
-                height: 47px;font-size: 10px;text-align: right">
-                  <div class="grid-child-element purple"style="background-image: url(https://wiki.swgoh.help/images/a/a5/Mod-Processor-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                  <div class="grid-child-element green"style="background-image: url(https://wiki.swgoh.help/images/d/da/Mod-Holo-Array-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                </div>
-                <div class="grid-container-element" style="
-                height: 47px;font-size: 10px;text-align: right">
-                  <div class="grid-child-element purple"style="background-image: url(https://wiki.swgoh.help/images/c/ce/Mod-Data-Bus-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                  <div class="grid-child-element green"style="background-image: url(https://wiki.swgoh.help/images/c/c8/Mod-Multiplexer-E.png);background-position: left;background-size: contain;background-repeat: no-repeat;">
-                    <strong>Primary</strong></br>
-                    Stat2 Stat3</br>
-                    stat4 Stat5</br>
-                  </div>
-                </div>
+                <script>
+                  function myFunction() {
+                    const card = document.querySelectorAll(".flip-card-inner");
+                    card.forEach((card) => {
+                      card.addEventListener("click", () => {
+                        card.classList.toggle("is-flipped");
+                      });
+                    })
+                  }
+                </script>
 
               </div>
-            </div><script>
-              function myFunction() {
-                const card = document.querySelectorAll(".flip-card-inner");
-                card.forEach((card) => {
-                  card.addEventListener("click", () => {
-                    card.classList.toggle("is-flipped");
-                  });
-              })}
-            </script>
-          
+              {% endfor %}
+            </div>
           </div>
-          {% endfor %}
-        </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 {% endblock content %}
-

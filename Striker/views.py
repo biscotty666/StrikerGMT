@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, QueryDict
 from django.db.models import Count
-from .models import Player, Strike, Guild, Toon
+from .models import Player, Strike, Guild, Toon, Mod, Skill, ModStat, Equipped, ShipCrew
 from datetime import date, timedelta
 from .forms import PlayerModelForm, StrikeModelForm, StrikeForm
 from django.views.generic import CreateView, TemplateView, ListView, DetailView, DeleteView, UpdateView
@@ -126,9 +126,41 @@ class ToonListView(ListView):
     return context
   context_object_name = 'toonsCount'
 
+class ToonListViewR0(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(gearLevel__gt=12)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = 'G13+'
+    return context
+  context_object_name = 'toonsCount'
+class ToonListViewR1(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(relic__gt=1).exclude(relic__gt=6)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = 'R1-R5'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListViewR6(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(relic__gt=6)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = 'R6+'
+    return context
+  context_object_name = 'toonsCount'
+
 class ToonListView5s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity__gt=5)
+    queryset = Toon.objects.filter(rarity__gt=5).exclude(combatType=2)
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
@@ -139,7 +171,7 @@ class ToonListView5s(ListView):
 
 class ToonListView6s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity__gt=6)
+    queryset = Toon.objects.filter(rarity__gt=6).exclude(combatType=2)
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
@@ -150,7 +182,41 @@ class ToonListView6s(ListView):
 
 class ToonListView7s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity=7)
+    queryset = Toon.objects.filter(rarity=7).exclude(combatType=2)
+    print(queryset.values('toonLevel'))
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '7\u2B50'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView5sShip(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity__gt=5).exclude(combatType=1)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '5\u2B50+'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView6sShip(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity__gt=6).exclude(combatType=1)
+    queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
+    return queryset
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['Label'] = '6\u2B50+'
+    return context
+  context_object_name = 'toonsCount'
+
+class ToonListView7sShip(ListView):
+  def get_queryset(self):
+    queryset = Toon.objects.filter(rarity=7).exclude(combatType=1)
     print(queryset.values('toonLevel'))
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
@@ -165,9 +231,8 @@ class PlayerDetailView(DetailView):
   context_object_name = 'player'
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(gearLevel__gt=1).order_by('-gp')
-    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(gearLevel__gt=1).order_by('-gp')
-    print(context['ships'])
+    context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType=1).order_by('-gp')
+    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(combatType=1).order_by('-gp')
     return context
 
 class ToonDetailView(DetailView):
@@ -182,112 +247,155 @@ class ToonDetailView(DetailView):
     return context
       
 def import_data(request):
-  from .swgohhelp import SWGOHhelp, settings
   import json
+  import os
+  
   with open('Striker/swgoh/json/config.json') as f:
     config = json.load(f)
-
-  creds = settings(config['credname'], config['credpass'], config['crednum'], config['credlet'])
-  client = SWGOHhelp(creds)
-
-  print("Getting player game data...")
-  def get_response():
-    try:
-      print("Trying guild endpoint")
-      return client.get_data('guild', config['allycode'])
-    except Exception as e:
-      print('Bad response, trying again...')
-      get_response()
-  response = get_response()
-  roster = response[0]['roster']
-  new_guild = response[0]
-  
-  if Guild.objects.filter(pk='1') == False:  
-    new_guild = Guild(
-      guildId = guild['id'],
-      name = guild['name'],
-      desc = guild['desc'],
-      members = guild['members'],
-      status = guild['status'],
-      required = guild['required'],
-      bannerColor = guild['bannerColor'],
-      bannerLogo = guild['bannerLogo'],
-      message = guild['message'],
-      gp = guild['gp'],
-    )
-    new_guild.save()
-  else:
-    guild = Guild.objects.get(pk='1')
-    guild.name = new_guild['name']
-    guild.desc = new_guild['desc']
-    guild.members = new_guild['members']
-    guild.status = new_guild['status']
-    guild.required = new_guild['required']
-    guild.bannerColor = new_guild['bannerColor']
-    guild.bannerLogo = new_guild['bannerLogo']
-    guild.message = new_guild['message']
-    guild.gp = new_guild['gp']
     
+  from .api_swgoh_help import api_swgoh_help
+
+  allycode = config['allycode']
+  client = api_swgoh_help({'username': config['credname'], 'password': config['credpass']})
+
+  def getGuild(api_client, allycode):
+      """ :parameters api_swgoh_help instance and player allycode """
+      payload = {'allycodes': [allycode], 'language': "eng_us", 'enums': True}
+      result = api_client.fetchGuilds(payload)
+      return result
+
+
+  # Fetch a list of guild member allycodes
+  members = getGuild(client, allycode)
+  with open('Striker/swgoh/json/response.json', 'w') as f:
+    json.dump(members, f)
+  
+  # with open('Striker/swgoh/json/response.json', 'r') as f:
+  #   members = json.load(f)
+  
+  guildResponse = members[0]
+
+  if Guild.objects.filter(pk='1') == False:  
+    newGuild = Guild.objects.create(
+      guildId = guildResponse['id'],
+      name = guildResponse['name'],
+      desc = guildResponse['desc'],
+      members = guildResponse['members'],
+      status = guildResponse['status'],
+      required = guildResponse['required'],
+      gp = guildResponse['gp'],
+      bannerColor = guildResponse['bannerColor'],
+      bannerLogo = guildResponse['bannerLogo'],
+      message = guildResponse['message']
+    )
+  else:  
+    myGuild = Guild.objects.all().first()
+    myGuild.name = guildResponse['name']
+    myGuild.desc = guildResponse['desc']
+    myGuild.members = guildResponse['members']
+    myGuild.status = guildResponse['status']
+    myGuild.required = guildResponse['required']
+    myGuild.gp = guildResponse['gp']
+    myGuild.bannerColor = guildResponse['bannerColor']
+    myGuild.bannerLogo = guildResponse['bannerLogo']
+    myGuild.message = guildResponse['message']
+    myGuild.save()
+    print('Guild updated')
+
+  # if myGuild := Guild.objects.get(guildId=guildResponse['id']):
+  #   myGuild.name = guildResponse['name']
+  #   myGuild.desc = guildResponse['desc']
+  #   myGuild.members = guildResponse['members']
+  #   myGuild.status = guildResponse['status']
+  #   myGuild.required = guildResponse['required']
+  #   myGuild.gp = guildResponse['gp']
+  #   myGuild.bannerColor = guildResponse['bannerColor']
+  #   myGuild.bannerLogo = guildResponse['bannerLogo']
+  #   myGuild.message = guildResponse['message']
+  #   print('Guild updated')
+  # else:
+  #   newGuild = Guild.objects.create(
+  #     guildId = guildResponse['id'],
+  #     name = guildResponse['name'],
+  #     desc = guildResponse['desc'],
+  #     members = guildResponse['members'],
+  #     status = guildResponse['status'],
+  #     required = guildResponse['required'],
+  #     gp = guildResponse['gp'],
+  #     bannerColor = guildResponse['bannerColor'],
+  #     bannerLogo = guildResponse['bannerLogo'],
+  #     message = guildResponse['message']
+  #   )
+  #   print('Guild created')
+    
+  playersResponse = guildResponse['roster']
+  
   all_players = Player.objects.all()
   for player in all_players:
-    if player not in roster:
+    if player not in playersResponse:
       player.active = False
+      player.save()
       
-  for player in roster:
-    new_player = player['id']
-    if Player.objects.filter(playerId=new_player).exists():
-      existing_player = Player.objects.get(playerId=new_player)
-      existing_player.gp=player['gp']
-      existing_player.allycode=player['allyCode']
-      existing_player.level=player['level']
-      existing_player.gpChar=player['gpChar']
-      existing_player.gpShip=player['gpShip']
-      existing_player.name=player['name']
-      existing_player.active=True
-      existing_player.save()
-      print('player updated')       
-    else:
-      new_player = Player(
-        name=player['name'],
-        playerId=player['id'],
-        gp=player['gp'],
-        allycode=player['allyCode'],
-        level=player['level'],
-        gpChar=player['gpChar'],
-        gpShip=player['gpShip'],
-        active=True,
-        guildMemberLevel=player['guildMemberLevel'],
-        updated=player['updated'],
-      )
-      new_player.save()
-      print('New player saved')
-
-  print('Import toons')
-  players = Player.objects.all()
-  Toon.objects.all().delete()
-  import time
-
-  for player in players:
-    print("Getting toon game data...")
-    def GetData():
-      try:
-        print(f'Trying player endpoint for {player.name}, {player.allycode}')
-        response = client.get_data('player', player.allycode)
-        return response
-      except Exception as e:
-        print("No response. Napping for 15...")
-        time.sleep(15)
-        GetData()
-    response = GetData()
-    print(f"Got data for {player}")
-
-    try:
-      roster = response[0]['roster']
+  playersList = [player for player in playersResponse]
+  guild = Guild.objects.all()[0]
+  # for player in playersList:
+  #   player.update({"guild": guild})
+    
+  # [player.update({"guild": guild}) for player in playersList]
+  newPlayersObjs = []
+  for player in playersList:
+    try: 
+      oldPlayer = Player.objects.get(playerId = player['id'])
+      oldPlayer.name = player['name']
+      oldPlayer.allycode = player['allyCode']
+      oldPlayer.level = player['level']
+      oldPlayer.gp = player['gp']
+      oldPlayer.gpChar = player['gpChar']
+      oldPlayer.gpShip = player['gpShip']
+      oldPlayer.guildMemberLevel = player['guildMemberLevel']
+      oldPlayer.active = True
+      oldPlayer.save()
+      print(oldPlayer.name)
     except:
-      GetData()
+      newPlayersObjs.append(Player(
+        name = player['name'],
+        playerId = player['id'],
+        allycode = player['allyCode'],
+        level = player['level'],
+        gp = player['gp'],
+        gpChar = player['gpChar'],
+        gpShip = player['gpShip'],
+        active = True,
+        guildMemberLevel = player['guildMemberLevel'],
+        guild = guild
+      ))
 
-    for toon in roster:
+  objs = Player.objects.bulk_create(newPlayersObjs)
+  allycodeList = []
+  # # allycodeList = [984519997,911364662,885976194,856572921]
+  [allycodeList.append(player['allyCode']) for player in playersList]
+  print('Requesting rosters for guild members')
+  playersResponse = client.fetchPlayers(allycodeList) 
+  with open('Striker/swgoh/json/players.json', 'w') as f:
+    json.dump(playersResponse, f)
+  # with open('Striker/swgoh/json/players.json', 'r') as f:
+    # playersResponse = json.load(f)
+
+  Mod.objects.all().delete()
+  Skill.objects.all().delete()
+  Toon.objects.all().delete()
+  ModStat.objects.all().delete()
+  Equipped.objects.all().delete()
+  ShipCrew.objects.all().delete()
+  
+  for player in playersResponse:
+    playerObj = Player.objects.get(playerId=player['id'])
+    print(f'Import for {playerObj.name}')
+    toons = player['roster']
+    print(toons)
+    for toon in toons:
       relic = toon['relic']
+ 
       if toon['relic']==None or toon['relic']['currentTier']==1:
         relic=0
       else:
@@ -295,21 +403,110 @@ def import_data(request):
       if toon['primaryUnitStat']==None:
         pus=0
       else:
-        pus=toon['primaryUnitStat']      
-      all_toons = Toon.objects.all()
-      new_toon = Toon(
-          player = player,
-          toonID = toon['id'],
-          toonName= toon['defId'],
-          nameKey = toon['nameKey'],
-          rarity = toon['rarity'],
-          toonLevel = toon['level'],
-          gp = toon['gp'],
-          gearLevel = toon['gear'],
-          primaryUnitStat = pus,
-          relic = relic
-       )    
-      new_toon.save()
-      print(f"{new_toon.toonName} saved")
+        pus=toon['primaryUnitStat']
+      
+      newToonsObj = []
+
+      newToonsObj.append(Toon(
+      # Toon.objects.create(
+        player = playerObj,
+        toonID = toon['id'],
+        toonName = toon['defId'],
+        nameKey = toon['nameKey'],
+        rarity = toon['rarity'],
+        toonLevel = toon['level'],
+        xp = toon['xp'],
+        gp = toon['gp'],
+        gearLevel = toon['gear'],
+        primaryUnitStat = pus,
+        relic = relic,
+        combatType = toon['combatType'],
+        crew = str([i['unitId'] for i in toon['crew']]).replace('[','').replace(']','').replace("'","").replace("'","").replace("'","").replace("'","").split(','),
+        isZeta = str([i['isZeta'] for i in toon['skills']]).count('True'),
+
+      ))
+      objs = Toon.objects.bulk_create(newToonsObj)
+      toonObj = Toon.objects.get(toonID=toon['id'])
+      print(f'Added toons for {playerObj.name}')
+      
+      skills = toon['skills']
+      newSkillsObj = []
+      for skill in skills:
+        newSkillsObj.append(Skill(
+          toon = toonObj,  
+          skillId = skill['id'],
+          tier = skill['tier'],
+          nameKey = skill['nameKey'],
+          isZeta = skill['isZeta'],
+          tiers = skill['tiers']
+        ))
+      objs = Skill.objects.bulk_create(newSkillsObj)
+      print(f'Added skills for {playerObj.name}')
+      
+      equippeds = toon['equipped']
+      newEqippedObj = []
+      for equipment in equippeds:
+        newEqippedObj.append(Equipped(
+          toon = toonObj,
+          equipmentId = equipment['equipmentId'],
+          slot = equipment['slot'],
+          nameKey = equipment['nameKey']
+        ))
+      objs = Equipped.objects.bulk_create(newEqippedObj)
+      print(f'Added gear for {playerObj.name}')
+      
+      if toon['combatType'] == "SHIP":
+        crews = toon['crew']
+        newCrewObj = []
+        for crew in crews:
+          newCrewObj.append(ShipCrew(
+            toon = toonObj,
+            unitId = crew['unitId'],
+            slot = crew['slot'],
+            skillId = crew['skillReferenceList'][0]['skillId'],
+            requiredTier = crew['skillReferenceList'][0]['requiredTier'],
+            requiredRarity = crew['skillReferenceList'][0]['requiredRarity'],
+            requiredRelicTier = crew['skillReferenceList'][0]['requiredRelicTier'],
+            skillessCrewAbilityId = crew['skilllessCrewAbilityId'],
+            gp = crew['gp'],
+            cp = crew['cp'],
+          ))
+        objs = ShipCrew.objects.bulk_create(newCrewObj)
+        print(f'Added crew for {playerObj.name}')
+      
+      mods = toon['mods']
+      newModsObj = []
+      for mod in mods:
+        newModsObj.append(Mod(
+          toon = toonObj,
+          modId = mod['id'],
+          modLevel = mod['level'],
+          tier = mod['tier'],
+          set = mod['set'],
+          pips = mod['pips']
+        ))
+      objs = Mod.objects.bulk_create(newModsObj)
+      print(f'Added mods for {playerObj.name}')
+      
+      newStatsObj = []
+      for mod in mods:
+        modObj = Mod.objects.filter(modId=mod['id'])
+        modObj = modObj[0]
+        ModStat.objects.create(
+          mod = modObj,
+          statType = 'P',
+          unitStat = mod['primaryStat']['unitStat'],
+          value = mod['primaryStat']['value']
+        )
+        sStats = mod['secondaryStat']
+        for sStat in sStats:
+          newStat = ModStat.objects.create(
+            mod = modObj,
+            statType = 'S',
+            unitStat = sStat['unitStat'],
+            roll = sStat['roll'],
+            value = sStat['value']
+          )
+        print(f'Added stats for {playerObj.name}')
 
   return render(request, 'Striker/import_success.html')
