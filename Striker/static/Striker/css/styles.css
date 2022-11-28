@@ -2205,7 +2205,7 @@
   height: 136px;
   width: 136px;
 }
-.combatType2 {
+.combatTypeSHIP {
   width: 140px;
   height: 140px;
   border: 2px solid rgba(255,255,255,0.2);
@@ -2214,56 +2214,56 @@
 }
 
 
-#combatType2star7 {
+#combatTypeSHIPstar7 {
   background-image: url(https://swgohteammanager.com/images/public/ship_rarity7.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 2;
 }
-#combatType2star6 {
+#combatTypeSHIPstar6 {
   background-image: url(https://swgohteammanager.com/images/public/ship_rarity6.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 2;
 }
-#combatType2star5 {
+#combatTypeSHIPstar5 {
   background-image: url(https://swgohteammanager.com/images/public/ship_rarity5.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 2;
 }
-#combatType2star4 {
+#combatTypeSHIPstar4 {
   background-image: url(https://swgohteammanager.com/images/public/ship_rarity4.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 2;
 }
-#combatType2star3 {
+#combatTypeSHIPstar3 {
   background-image: url(https://swgohteammanager.com/images/public/ship_rarity3.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 2;
 }
-#combatType2star2 {
+#combatTypeSHIPstar2 {
   background-image: url(https://swgohteammanager.com/images/public/ship_rarity2.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 2;
 }
-#combatType2star1 {
+#combatTypeSHIPstar1 {
   background-image: url(https://swgohteammanager.com/images/public/ship_rarity1.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 2;
 }
-#combatType2star0 {
+#combatTypeSHIPstar0 {
   background-image: url(https://swgohteammanager.com/images/public/rarity0.png);
   background-position: center;
   background-repeat: no-repeat;

@@ -160,7 +160,7 @@ class ToonListViewR6(ListView):
 
 class ToonListView5s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity__gt=5).exclude(combatType=2)
+    queryset = Toon.objects.filter(rarity__gt=5).exclude(combatType='SHIP')
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
@@ -171,7 +171,7 @@ class ToonListView5s(ListView):
 
 class ToonListView6s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity__gt=6).exclude(combatType=2)
+    queryset = Toon.objects.filter(rarity__gt=6).exclude(combatType='SHIP')
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
@@ -182,7 +182,7 @@ class ToonListView6s(ListView):
 
 class ToonListView7s(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity=7).exclude(combatType=2)
+    queryset = Toon.objects.filter(rarity=7).exclude(combatType='SHIP')
     print(queryset.values('toonLevel'))
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
@@ -194,7 +194,7 @@ class ToonListView7s(ListView):
 
 class ToonListView5sShip(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity__gt=5).exclude(combatType=1)
+    queryset = Toon.objects.filter(rarity__gt=5).exclude(combatType='CHARACTER')
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
@@ -205,7 +205,7 @@ class ToonListView5sShip(ListView):
 
 class ToonListView6sShip(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity__gt=6).exclude(combatType=1)
+    queryset = Toon.objects.filter(rarity__gt=6).exclude(combatType='CHARACTER')
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
   def get_context_data(self, **kwargs):
@@ -216,7 +216,7 @@ class ToonListView6sShip(ListView):
 
 class ToonListView7sShip(ListView):
   def get_queryset(self):
-    queryset = Toon.objects.filter(rarity=7).exclude(combatType=1)
+    queryset = Toon.objects.filter(rarity=7).exclude(combatType='CHARACTER')
     print(queryset.values('toonLevel'))
     queryset = queryset.values('toonName').annotate(toonNameCount=(Count('toonName'))).order_by('toonName')
     return queryset
@@ -232,18 +232,18 @@ class PlayerDetailView(DetailView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType='CHARACTER').order_by('-gp')
-    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).exclude(combatType='SHIP').order_by('-gp')
+    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType='SHIP').order_by('-gp')
     return context
 
 class ToonDetailView(DetailView):
   model = Toon
   # toons = Toon.objects.filter(player=pk_url_kwarg)
   context_object_name = 'toon'
-  slug_field = 'toonName'
+  slug_field = 'nameKey'
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     # print(self.kwargs)
-    context['players'] = Toon.objects.filter(toon=self.kwargs['toonName']).order_by('toonName')
+    context['players'] = Toon.objects.filter(toon=self.kwargs['nameKey']).order_by('nameKey')
     return context
       
 def import_data(request):
@@ -421,8 +421,8 @@ def import_data(request):
         primaryUnitStat = pus,
         relic = relic,
         combatType = toon['combatType'],
-        crew = str([i['unitId'] for i in toon['crew']]).replace('[','').replace(']','').replace("'","").replace("'","").replace("'","").replace("'","").split(','),
-        isZeta = str([i['isZeta'] for i in toon['skills']]).count('True'),
+        crew = [i['unitId'] for i in toon['crew']],
+        isZeta = [i['isZeta'] for i in toon['skills']],
 
       ))
       objs = Toon.objects.bulk_create(newToonsObj)
