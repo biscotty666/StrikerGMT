@@ -6,6 +6,29 @@ from datetime import date, timedelta
 from .forms import PlayerModelForm, StrikeModelForm, StrikeForm
 from django.views.generic import CreateView, TemplateView, ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
+from rest_framework import viewsets
+from rest_framework import permissions
+from Striker.serializers import PlayerSerializer, StrikeSerializer, ToonSerializer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+
+class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
+  queryset = Player.objects.all().order_by('-gp')
+  serializer_class = PlayerSerializer
+  permission_classes = [permissions.IsAuthenticated]
+  authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+class StrikeViewSet(viewsets.ModelViewSet):
+  queryset = Strike.objects.all().order_by('player')
+  serializer_class = StrikeSerializer
+  permission_classes = [permissions.IsAuthenticated]
+  authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+class ToonViewSet(viewsets.ReadOnlyModelViewSet):
+  queryset = Toon.objects.all().order_by('-gp')
+  serializer_class = ToonSerializer
+  permission_classes = [permissions.IsAuthenticated]
+  authentication_classes = [SessionAuthentication, BasicAuthentication]
+
 
 class HomeView(TemplateView):
   template_name = 'Striker/home.html'
@@ -51,11 +74,9 @@ class PlayerListView(ListView):
   context_object_name = 'players'
   ordering = ['-gp']
 
-# class StrikeListView(ListView):
-#   template_name = 'Striker/strikes.html'
-#   model = Strike
-#   context_object_name = 'strikes'
-  
+def search_player(request):
+  pass
+
 def strike_list(request, **pk):
   strikes = Strike.objects.all().order_by('player')
   if request.method == 'POST':
