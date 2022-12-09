@@ -460,7 +460,7 @@ def import_data(request):
         relic = relic,
         combatType = toon['combatType'],
         crew = [i['unitId'] for i in toon['crew']],
-        isZeta = [i['isZeta'] for i in toon['skills']],
+        isZeta = str([i['isZeta'] for i in toon['skills']]).count('True'),
 
       ))
       objs = Toon.objects.bulk_create(newToonsObj)
@@ -475,7 +475,7 @@ def import_data(request):
           skillId = skill['id'],
           tier = skill['tier'],
           nameKey = skill['nameKey'],
-          isZeta = skill['isZeta'],
+          isZeta = str([i['isZeta'] for i in toon['skills']]).count('True'),
           tiers = skill['tiers']
         ))
       objs = Skill.objects.bulk_create(newSkillsObj)
