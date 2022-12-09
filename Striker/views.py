@@ -130,10 +130,14 @@ def strike_detail(request, pk):
     context = {'strike':strike, 'form':form}
     if form.is_valid():
       form.save()
-      return render(request, 'Striker/strikes.html', context)        
+      # return render(request, 'Striker/strikes.html', context)        
       # return render(request, 'Striker/partials/strike-details.html', context)        
-    context = {'form':form}
-    return render(request, 'Striker/partials/edit-strike-form.html', context)
+    # context = {'form':form}
+    # return render(request, 'Striker/partials/edit-strike-form.html', context)
+    strikes = Strike.objects.all().order_by('player')
+    counts = Player.objects.annotate(player_strikes = Count('strike')).order_by('-player_strikes')
+    context = {'form': form, 'strikes': strikes, 'counts': counts}
+    return render(request, "Striker/strikes.html", context)
 
 def delete_strike(request, pk):
   strike = Strike.objects.get(pk=pk) 

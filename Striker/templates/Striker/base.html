@@ -19,7 +19,7 @@
   <script src="https://unpkg.com/htmx.org@1.8.4" integrity="sha384-wg5Y/JwF7VxGk4zLsJEcAojRtlVp1FKKdGy1qN+OMtdq72WRvX/EdRdqg/LOhYeV" crossorigin="anonymous"></script>
   <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
 </head>
-<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="bg-black h-full p-5 text-center text-slate-300">
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="bg-black h-full p-5 text-center text-slate-300" id="main">
 
     {% include './navbar.html' %}
     {% block content %}

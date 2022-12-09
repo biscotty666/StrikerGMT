@@ -41,7 +41,7 @@
                 hx-post="{% url 'strike.list' %}" 
                 hx-trigger="submit" 
                 hx-target="#information"
-                hx-swap="outerHTML"
+                hx-swap="innerHTML"
                 class="space-y-6" action="#">
                 <div>
                   {% render_field form.player|add_label_class:"p-2" %}
