@@ -17,6 +17,13 @@ class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
   # permission_classes = [permissions.IsAuthenticated]
   # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
 
+def search_player(request):
+  print(request)
+  search_text = request.POST.get("search")
+  results = Player.objects.filter(name__icontains=search_text)
+  context = {'results': results}
+  return render(request, 'Striker/partials/player-search-results.html', context)
+
 class StrikeViewSet(viewsets.ModelViewSet):
   queryset = Strike.objects.all().order_by('player')
   serializer_class = StrikeSerializer
@@ -27,8 +34,8 @@ class StrikeViewSet(viewsets.ModelViewSet):
 class ToonViewSet(viewsets.ReadOnlyModelViewSet):
   queryset = Toon.objects.all().order_by('-gp')
   serializer_class = ToonSerializer
-  permission_classes = [permissions.IsAuthenticated]
-  authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+  # permission_classes = [permissions.IsAuthenticated]
+  # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
 
 
 class HomeView(TemplateView):
@@ -254,6 +261,15 @@ class PlayerDetailView(DetailView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['toons'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType='CHARACTER').order_by('-gp')
+    context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType='SHIP').order_by('-gp')
+    return context
+
+class PlayerShipsDetailView(DetailView):
+  model = Player
+  context_object_name = 'player'
+  template_name = 'Striker/player_ships_detail.html'
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
     context['ships'] = Toon.objects.filter(player=self.kwargs['pk']).filter(combatType='SHIP').order_by('-gp')
     return context
 

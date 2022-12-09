@@ -1,0 +1,25 @@
+{% if results %}
+  {% csrf_token %}
+  {% for player in results %}
+    <div class="box-border h-85 w-60 mb-1">
+      <div class="mx-2 rounded-lg border-double border-2 border-emerald-500 px-2 py-2 bordermildblue">
+        <div class="bg-gray-800">
+          <h2 class="text-blue-400 text-lg title-font font-medium mb-4 button-85"><a
+              href="{% url 'player.detail' player.pk %}" title="Link to Player's Toons">{{ player.name }}</a>
+          </h2>
+        </div>
+        <div class="text-left">
+          <p class="leading-relaxed text-base">GP: {{ player.gp|intword }}</p>
+          <p class="leading-relaxed text-base">Toons: {{ player.gpChar|intword }}</p>
+          <p class="leading-relaxed text-base">Ships: {{ player.gpShip|intword|intcomma }}</p>
+          <p class="leading-relaxed text-base">Allycode: <a class="text-blue-500"
+              href="https://swgoh.gg/p/{{ player.allycode }}" Title="Link to SWGOH.gg">{{ player.allycode }}</a>
+            <span class="text-xs">.gg</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No search results</p>
+{% endif % }

@@ -6,6 +6,7 @@ from . import views
 
 urlpatterns = [
   path('', views.HomeView.as_view()),
+  path('striker/search-player', views.search_player, name='search-player'),
   path('striker/', views.HomeView.as_view()),
   path('striker/strikes/<int:pk>/', views.strike_detail, name='strike.detail' ),
   path('striker/strikes/delete-strike/<int:pk>/', views.delete_strike, name='delete-strike'),
@@ -26,6 +27,7 @@ urlpatterns = [
   path('striker/toons5sShip/', views.ToonListView5sShip.as_view(), name='toon.list5sShip'),
   path('striker/toons6sShip/', views.ToonListView6sShip.as_view(), name='toon.list6sShip'),
   path('striker/toons7sShip/', views.ToonListView7sShip.as_view(), name='toon.list7sShip'),
+  path('striker/players/ships/<int:pk>', views.PlayerShipsDetailView.as_view(), name='player.detail.ships'),
   path('striker/players/<int:pk>', views.PlayerDetailView.as_view(), name='player.detail'),
   path('striker/toons/<slug:toonName>/', views.ToonDetailView.as_view(), name='toon.detail'),
   path("__reload__/", include("django_browser_reload.urls")),
