@@ -25,7 +25,7 @@
                   onclick="myFunction()">
                   <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 "
-                      style="margin-bottom: 10px;font-size: 15px;;" onclick = "myFunction1()">{{ toon.toonName }}
+                      style="margin-bottom: 10px;font-size: 15px;;" onclick = "myFunction1()">{{ toon.nameKey }}
                     </h2>
                     <div style="margin: 15px auto 10px;width: 146px;display: block;">
                       <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" style="height: 132px; border-radius: 50%; width: 136px;">
@@ -56,7 +56,7 @@
                   </div>
                   <div class="flip-card-back text-left bordermildblue">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85"
-                      style="text-align: center;font-size: 15px;">{{ toon.toonName }}
+                      style="text-align: center;font-size: 15px;">{{ toon.nameKey }}
                     </h2>
                     <div class="grid-container-element" style="
                 height: 47px;font-size: 10px;text-align: right">
@@ -140,7 +140,7 @@
                   onclick="myFunction()">
                   <div class="flip-card-front" style=" width: -webkit-fill-available;text-align: center;">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 "
-                      style="margin-bottom: 10px;font-size: 15px;">{{ toon.toonName }}
+                      style="margin-bottom: 10px;font-size: 15px;">{{ toon.nameKey }}
                     </h2>
                     <div style="margin: 15px auto 10px;width: 146px;display: block;">
                       <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" class="px136">
@@ -165,7 +165,7 @@
                   <div class="flip-card-back text-left bordermildblue">
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85"
                       style="text-align: center;font-size: 15px;">
-                      {{ toon.toonName }}
+                      {{ toon.nameKey }}
                     </h2>
                     <div class="grid-container-element" style="
                 height: 47px;font-size: 10px;text-align: right">
