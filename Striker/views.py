@@ -9,25 +9,26 @@ from django.urls import reverse_lazy
 from rest_framework import viewsets
 from rest_framework import permissions
 from Striker.serializers import PlayerSerializer, StrikeSerializer, ToonSerializer
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 
 class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
   queryset = Player.objects.all().order_by('-gp')
   serializer_class = PlayerSerializer
-  permission_classes = [permissions.IsAuthenticated]
-  authentication_classes = [SessionAuthentication, BasicAuthentication]
+  # permission_classes = [permissions.IsAuthenticated]
+  # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
 
 class StrikeViewSet(viewsets.ModelViewSet):
   queryset = Strike.objects.all().order_by('player')
   serializer_class = StrikeSerializer
-  permission_classes = [permissions.IsAuthenticated]
-  authentication_classes = [SessionAuthentication, BasicAuthentication]
+  
+  # permission_classes = [permissions.IsAuthenticated]
+  # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
 
 class ToonViewSet(viewsets.ReadOnlyModelViewSet):
   queryset = Toon.objects.all().order_by('-gp')
   serializer_class = ToonSerializer
   permission_classes = [permissions.IsAuthenticated]
-  authentication_classes = [SessionAuthentication, BasicAuthentication]
+  authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
 
 
 class HomeView(TemplateView):
