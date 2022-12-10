@@ -17,13 +17,6 @@ class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
   # permission_classes = [permissions.IsAuthenticated]
   # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
 
-def search_player(request):
-  print(request)
-  search_text = request.POST.get("search")
-  results = Player.objects.filter(name__icontains=search_text)
-  context = {'results': results}
-  return render(request, 'Striker/partials/player-search-results.html', context)
-
 class StrikeViewSet(viewsets.ModelViewSet):
   queryset = Strike.objects.all().order_by('player')
   serializer_class = StrikeSerializer
@@ -83,10 +76,24 @@ class PlayerListView(ListView):
   ordering = ['-gp']
 
 def search_player(request):
-  pass
+  print(request)
+  if request.method == 'POST':
+    search_text = request.POST.get("search")
+    results = Player.objects.filter(name__icontains=search_text).order_by('-gp')
+    context = {'players': results}
+    return render(request, 'Striker/partials/player-search-results.html', context)
+
+def search_strike(request):
+  print(request)
+  if request.method == 'POST':
+    search_text = request.POST.get("search")
+    strikes = Strike.objects.filter(player__name__icontains=search_text)
+    context = {'strikes': strikes}
+    return render(request, 'Striker/partials/strike-search-results.html', context)
 
 def strike_list(request, **pk):
   strikes = Strike.objects.all().order_by('player')
+  print(strikes.values('player_id', 'player__name'))
   if request.method == 'POST':
     if len(pk) == 0:
       form = StrikeModelForm(request.POST)
@@ -130,10 +137,14 @@ def strike_detail(request, pk):
     context = {'strike':strike, 'form':form}
     if form.is_valid():
       form.save()
-      return render(request, 'Striker/strikes.html', context)        
+      # return render(request, 'Striker/strikes.html', context)        
       # return render(request, 'Striker/partials/strike-details.html', context)        
-    context = {'form':form}
-    return render(request, 'Striker/partials/edit-strike-form.html', context)
+    # context = {'form':form}
+    # return render(request, 'Striker/partials/edit-strike-form.html', context)
+    strikes = Strike.objects.all().order_by('player')
+    counts = Player.objects.annotate(player_strikes = Count('strike')).order_by('-player_strikes')
+    context = {'form': form, 'strikes': strikes, 'counts': counts}
+    return render(request, "Striker/strikes.html", context)
 
 def delete_strike(request, pk):
   strike = Strike.objects.get(pk=pk) 

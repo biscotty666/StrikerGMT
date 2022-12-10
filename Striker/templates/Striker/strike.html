@@ -20,7 +20,8 @@
               <form 
                 hx-post="{% url 'strike.list' strike.pk %}" 
                 hx-trigger="submit" 
-                hx-target="#information"
+                hx-target="#main"
+                hx-swap="innerHTML"
                 class="space-y-6" action="#">
                 <div>
                   {% render_field form.player|add_label_class:"p-2" %}
@@ -50,9 +51,9 @@
         </div>
 
 
-    <div id="strike-list">
+    <!-- <div id="strike-list">
       {% include 'Striker/partials/strike-list.html' %}
-    </div>
+    </div> -->
   </div>
 </div>
 
