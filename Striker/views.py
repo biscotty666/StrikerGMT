@@ -79,13 +79,21 @@ def search_player(request):
   print(request)
   if request.method == 'POST':
     search_text = request.POST.get("search")
-    results = Player.objects.filter(name__icontains=search_text)
+    results = Player.objects.filter(name__icontains=search_text).order_by('-gp')
     context = {'players': results}
     return render(request, 'Striker/partials/player-search-results.html', context)
-    # return context
+
+def search_strike(request):
+  print(request)
+  if request.method == 'POST':
+    search_text = request.POST.get("search")
+    strikes = Strike.objects.filter(player__name__icontains=search_text)
+    context = {'strikes': strikes}
+    return render(request, 'Striker/partials/strike-search-results.html', context)
 
 def strike_list(request, **pk):
   strikes = Strike.objects.all().order_by('player')
+  print(strikes.values('player_id', 'player__name'))
   if request.method == 'POST':
     if len(pk) == 0:
       form = StrikeModelForm(request.POST)

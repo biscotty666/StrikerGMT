@@ -6,6 +6,22 @@
 
 <div class="body-font overflow-hidden">
   <div class="px-5 py-24 mx-auto">
+    <h1 class="text-5xl mb-2 mt-2 text-emerald-500">Strikes</h1>
+    <input class="text-slate-300 bg-black border-solid border-2 border-slate-700 mb-2 px-2" type="search"
+    name="search"
+    placeholder="Search for player..."
+    hx-trigger="keyup changed delay:500ms, search"
+    hx-target="#search-results"
+    hx-post="/striker/strikes/search-strike/"
+  /> 
+  <div>
+    {% for count in counts %}
+    {% if count.player_strikes > 0 %}
+    <p>{{ count.name }}: {{ count.player_strikes }}</p>
+    {% endif %}
+    {% endfor %}
+  </div>
+
 
     <div class="m-8" x-data="{showModal: false}">
       <!-- Modal toggle -->
@@ -17,7 +33,7 @@
       </button>
                 <div id="information" class="mt-8 text-2xl"></div>
 
-      <!-- Main modal -->
+                <!-- Main modal -->
       <div x-show="showModal" id="authentication-modal" tabindex="-1" aria-hidden="true"
         class="flex justify-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
         <div @click.outside="showModal = false" class="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -72,8 +88,8 @@
       </div>
     </div>
 
-    <div id="strike-list">
-      {% include 'Striker/partials/strike-list.html' %}
+    <div id="search-results">
+      {% include 'Striker/partials/strike-search-results.html' %}
     </div>
   </div>
 </div>

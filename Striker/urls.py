@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
   path('', views.HomeView.as_view()),
   path('striker/players/search-player/', views.search_player, name='search-player'),
+  path('striker/strikes/search-strike/', views.search_strike, name='search-strike'),
   path('striker/', views.HomeView.as_view()),
   path('striker/strikes/<int:pk>/', views.strike_detail, name='strike.detail' ),
   path('striker/strikes/delete-strike/<int:pk>/', views.delete_strike, name='delete-strike'),
