@@ -17,13 +17,6 @@ class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
   # permission_classes = [permissions.IsAuthenticated]
   # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
 
-def search_player(request):
-  print(request)
-  search_text = request.POST.get("search")
-  results = Player.objects.filter(name__icontains=search_text)
-  context = {'results': results}
-  return render(request, 'Striker/partials/player-search-results.html', context)
-
 class StrikeViewSet(viewsets.ModelViewSet):
   queryset = Strike.objects.all().order_by('player')
   serializer_class = StrikeSerializer
@@ -83,7 +76,13 @@ class PlayerListView(ListView):
   ordering = ['-gp']
 
 def search_player(request):
-  pass
+  print(request)
+  if request.method == 'POST':
+    search_text = request.POST.get("search")
+    results = Player.objects.filter(name__icontains=search_text)
+    context = {'players': results}
+    return render(request, 'Striker/partials/player-search-results.html', context)
+    # return context
 
 def strike_list(request, **pk):
   strikes = Strike.objects.all().order_by('player')
