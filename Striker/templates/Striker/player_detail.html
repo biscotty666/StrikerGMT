@@ -22,21 +22,21 @@
                     <h2 class="text-emerald-400 text-lg title-font font-medium mb-4 button-85 "
                       style="margin-bottom: 10px;font-size: 15px;;" onclick = "myFunction1()">{{ toon.nameKey }}
                     </h2>
-                    <div style="margin: 15px auto 10px;width: 146px;display: block;">
-                      <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" style="height: 132px; border-radius: 50%; width: 136px;">
-                        <div id="gear{{ toon.gearLevel }}" style="height: 136px;width: 136px;">
+                    <div style="margin: 15px auto 10px;width: 116px;display: block;">
+                      <div id="C-{{ toon.toonName }}" class ="combatType{{ toon.combatType }}" style="height: 112px; border-radius: 50%; width: 116px;">
+                        <div id="gear{{ toon.gearLevel }}" style="height: 116px;width: 116px;">
                           <div class="relic{{ toon.relic }} relic{{ toon.relic }}{{ toon.toonName }} " >
                             <div id="star{{ toon.rarity }}"
-                              style="height: 136px; width: 136px; position: relative;bottom: 17px;">
+                              style="height: 116px; width: 116px; position: relative;bottom: 12px;">
                               
                               
                                 <div class="text-left ">
                                   <p class="leading-relaxed text-base"
-                                style="    position: relative;left: 28px;top: 145px;">GP: {{ toon.gp|intcomma }}</p>
+                                style="    position: relative;left: 23px;top: 140px;">GP: {{ toon.gp|intcomma }}</p>
                                   <p class="leading-relaxed text-base" id= "reliccount{{ toon.relic }}">
                                 {{ toon.relic }}</p>
                                   <p class="leading-relaxed text-base"
-                                style="position: relative; left: 55px;top: 65px;font-size: x-large;color: white;font-weight: bold;">
+                                style="position: relative; left: 45px;top: 60px;font-size: x-large;color: white;font-weight: bold;">
                                 {{ toon.toonLevel }}</p>
                                   <p id = "zetacount{{ toon.isZeta }}" class="leading-relaxed text-base" >
                                   {{ toon.isZeta }}</p>
