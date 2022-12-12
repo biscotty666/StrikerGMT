@@ -100,7 +100,7 @@ class Skill(models.Model):
   skillId = models.CharField(max_length=30)
   tier = models.SmallIntegerField()
   nameKey = models.CharField(max_length=30)
-  isZeta = models.BooleanField(default=False)
+  isZeta = models.CharField(max_length=45, blank=True)
   tiers = models.SmallIntegerField()
 
   def __str__(self):
