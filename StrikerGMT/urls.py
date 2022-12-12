@@ -5,9 +5,9 @@ from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshVie
 from Striker import views
 
 router = routers.DefaultRouter()
-router.register(r'players', views.PlayerViewSet)
-router.register(r'strikes', views.StrikeViewSet)
-router.register(r'toons', views.ToonViewSet)
+router.register(r'api/players', views.PlayerViewSet)
+router.register(r'api/strikes', views.StrikeViewSet)
+router.register(r'api/toons', views.ToonViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
