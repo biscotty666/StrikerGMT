@@ -541,21 +541,25 @@ def import_data(request):
       for mod in mods:
         modObj = Mod.objects.filter(modId=mod['id'])
         modObj = modObj[0]
-        ModStat.objects.create(
+        newStatsObj.append(ModStat(
+        # ModStat.objects.create(
           mod = modObj,
           statType = 'P',
           unitStat = mod['primaryStat']['unitStat'],
           value = mod['primaryStat']['value']
-        )
+        ))
+        
         sStats = mod['secondaryStat']
         for sStat in sStats:
-          newStat = ModStat.objects.create(
+          newStatsObj.append(ModStat(
+          # newStat = ModStat.objects.create(
             mod = modObj,
             statType = 'S',
             unitStat = sStat['unitStat'],
             roll = sStat['roll'],
             value = sStat['value']
-          )
+          ))
         print(f'Added stats for {playerObj.name}')
+      objs = ModStat.objects.bulk_create(newStatsObj)
 
   return render(request, 'Striker/import_success.html')
